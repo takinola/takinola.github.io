@@ -1,5 +1,5 @@
-console.log('ver 4')
-if(jQuery){console.log('jQuery loaded...')}
+console.log('ver 6')
+if(jQuery.ui){console.log('jQuery ui loaded...')}
 
 window.setTimeout(function() {
   console.log(jQuery.datepicker)
@@ -8,7 +8,7 @@ window.setTimeout(function() {
     maxDate: '+2M',
     beforeShowDay: jQuery.datepicker.noWeekends
   });
-}, 2000);
+}, 4000);
 
 document.onreadystatechange = function(){
   if(document.readyState === 'complate'){
