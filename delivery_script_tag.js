@@ -1,4 +1,4 @@
-console.log('ver 3')
+console.log('ver 4')
 console.log(jQuery.fn.jquery + ' version - 1');
 
 const jq19 = jQuery.noConflict(true);
@@ -12,7 +12,7 @@ const jq19 = jQuery.noConflict(true);
   jQuery("#date").datepicker( { 
     minDate: +1, 
     maxDate: '+2M',
-    beforeShowDay: $.datepicker.noWeekends
+    beforeShowDay: jQuery.datepicker.noWeekends
   });
 
 
