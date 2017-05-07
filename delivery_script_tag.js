@@ -1,4 +1,4 @@
-window.onload(function(){
+window.onload = function(){
   console.log('yay - script tag loaded')
   jQuery(function() {
     console.log(jQuery.datepicker)
@@ -8,4 +8,4 @@ window.onload(function(){
       beforeShowDay: jQuery.datepicker.noWeekends
     });
   });
-})
+}
