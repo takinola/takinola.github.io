@@ -1,6 +1,7 @@
-console.log('ver 2')
+console.log('ver 3')
+if(jQuery){console.log('jQuery loaded...')}
 
-jQuery(function() {
+jQuery(document).ready(function() {
   console.log(jQuery.datepicker)
   jQuery("#date").datepicker( { 
     minDate: +1, 
