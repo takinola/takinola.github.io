@@ -1,14 +1,14 @@
-console.log('ver 3')
+console.log('ver 4')
 if(jQuery){console.log('jQuery loaded...')}
 
-jQuery(document).ready(function() {
+window.setTimeout(function() {
   console.log(jQuery.datepicker)
   jQuery("#date").datepicker( { 
     minDate: +1, 
     maxDate: '+2M',
     beforeShowDay: jQuery.datepicker.noWeekends
   });
-});
+}, 2000);
 
 document.onreadystatechange = function(){
   if(document.readyState === 'complate'){
