@@ -1,5 +1,6 @@
-console.log('ver 6')
-if(jQuery.ui){console.log('jQuery ui loaded...')}
+console.log('ver 7')
+if($.ui){console.log('jQuery ui loaded...')}
+  else {console.log('jQuery UI not found...')}
 
 window.setTimeout(function() {
   console.log(jQuery.datepicker)
