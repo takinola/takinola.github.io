@@ -1,4 +1,4 @@
-document.onload(function()=>{
+document.onload(function(){
   console.log('yay - script tag loaded')
   jQuery(function() {
     console.log(jQuery.datepicker)
