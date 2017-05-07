@@ -1,3 +1,4 @@
+console.log('ver 1')
 window.onload = function(){
   console.log('yay - script tag loaded')
   jQuery(function() {
