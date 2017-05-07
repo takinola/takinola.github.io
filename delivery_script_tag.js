@@ -1,15 +1,23 @@
-console.log('ver 7')
-if($.ui){console.log('jQuery ui loaded...')}
-  else {console.log('jQuery UI not found...')}
+console.log('ver 9')
+console.log(jQuery.fn.jQuery + ' version');
 
-window.setTimeout(function() {
+const jQuery19 = jQuery.noConflict(true);
+(function(jQuery){
+  if(jQuery19.ui){console.log('jQuery ui loaded...')}
+    else {console.log('jQuery UI not found...')}
+
   console.log(jQuery.datepicker)
+
   jQuery("#date").datepicker( { 
     minDate: +1, 
     maxDate: '+2M',
     beforeShowDay: jQuery.datepicker.noWeekends
   });
-}, 4000);
+
+
+}(jQuery19));
+
+
 
 document.onreadystatechange = function(){
   if(document.readyState === 'complate'){
