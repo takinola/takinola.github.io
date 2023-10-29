@@ -19,6 +19,10 @@
 <meta name="theme-color" content="#712cf9">
 -->
     <style>
+      code {
+        background-color: #f1f1f1;
+      }
+      
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -104,7 +108,7 @@
 
   <body>
 <div class="d-flex">
-    <div class="flex-shrink-0 p-3" style="width: 280px;">
+    <div class="flex-shrink-0 p-3 fixed-top" style="width: 280px;">
         <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
             <img src="/img/weave_logo.png" alt="Weave" width="30" height="24" > 
 <!--          <svg class="bi pe-none me-2" width="30" height="24"><use xlink:href="#bootstrap"></use></svg> -->
@@ -148,12 +152,12 @@
             </button>
             <div class="collapse" id="orders-collapse">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Authentication</a></li>
-                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Listings</a></li>
-                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Calendar</a></li>
-                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Reservations</a></li>
-                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Users</a></li>
-                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Reviews</a></li>
+                <li><a href="#authentication" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Authentication</a></li>
+                <li><a href="#listings" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Listings</a></li>
+                <li><a href="#calendar" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Calendar</a></li>
+                <li><a href="#reservations" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Reservations</a></li>
+                <li><a href="#users" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Users</a></li>
+                <li><a href="#reviews" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Reviews</a></li>
               </ul>
             </div>
           </li>
@@ -174,28 +178,28 @@
         </ul>
       </div>
       <div class="p-2 w-75">
-          <section class="mt-4" id="introduction">
+          <section class="mt-5" id="introduction">
 <h3> Background</h3>
 <p>Weave is an API aggregator for the Travel Tech industry.  Weave enables applications to integrate with a number of different service providers using a single API.  </p>
 <p> When the underlying service provider APIs change, the integrations built using Weave will be updated with minimal to no development effort by application developers.  Weave will continue to support previous versions of its own API endpoints for a predetermined period of time to enable developers sufficient time to plan and execute updates to their product roadmaps</p>
           </section>
           
-          <section class="mt-4" id="domain">
+          <section class="mt-5" id="domain">
             <h3>API Design</h3>
             <p class="lead">Domain</p>
               <p>Requests are made to the Weave API domain eg <code>https://use1.weaveapi.com</code></p>
             <p>Requests can only be made using SSL enabled connections</p>
           </section>
-          <section class="mt-4" id="api_version">
+          <section class="mt-5" id="api_version">
               <p class="lead">API Versions</p>
               <p>Requests will specify the Weave API version being used.  If the version is omitted (or is invalid), Weave will default to the latest API version.</p>
               <p>Deprecation schedule: Weave will support 2 previous versions for a period of 6 months before deprecation</p>
           </section>
-          <section class="mt-4" id="endpoints">
+          <section class="mt-5" id="endpoints">
             <p class="lead">Endpoints</p>
             <p>Each API will have an end point eg <code>/listings</code>.  End points may require additional query parameters (for GET requests) or body parameters (for POST requests).</p>
           </section>
-          <section class="mt-4" id="headers">
+          <section class="mt-5" id="headers">
             <p class="lead">Headers</p>
             <p>Additional parameters for the request, for example authentication tokens and request destinations</p>
             <p>
@@ -205,7 +209,7 @@
 curl -X GET \ 
       https://use1.weaveapi.com/v1/reservations/1234 \                 // Weave API endpoint
       -H 'Authorization: Bearer myaccesstoken’  \                      // Weave API access token
-      -H 'Destination: hostaway’                                       // Proxied PMS
+      -H 'Destination: hostaway’ \                                     // Proxied PMS
       -H 'Destination- auth: Hostaway access token’  \                 // Proxied PMS access token 
       -H 'Cache-control: no-cache’ \                                   // Additional header commands    
   </code>
@@ -213,7 +217,7 @@ curl -X GET \
             </p>
           </section>
           
-          <section class="mt-4" id="integrations">
+          <section class="mt-5" id="integrations">
             <h3>Context</h3>
 		  <p class="lead">Integrations</p>
             <table class="table">
@@ -259,17 +263,17 @@ curl -X GET \
                 </tbody>
             </table>
           </section>
-          <section class="mt-4" id="origin">
+          <section class="mt-5" id="origin">
           <p class="lead">Origin</p>
         <p>Origin for all requests will be: <code>https://use1.weaveapi.com</code>
 </p>
           </section>
-          <section class="mt-4" id="api_version">
+          <section class="mt-5" id="api_version">
             <p class="lead">API Version</p>
               <p>Current API version is “v1”</p>
               <p>Request paths should be prefixed with the API version ie  <code>“/api/v1/endpoint/path”</code></p>
           </section>
-          <section class="mt-4" id="api_headers">
+          <section class="mt-5" id="api_headers">
             <p class="lead">Headers</p>
               <p>The following headers need to be included with each request</p>
               <p><span class="fw-semibold">X-WEAVE-APIKEY</span> 
@@ -302,7 +306,7 @@ Id of the end user on the target PMS / OTA system
 </p>
           </section>
 
-          <section class="mt-4" id="returned_data">
+          <section class="mt-5" id="returned_data">
               <p class="lead">Returned data</p>
 <p>Data is always returned in the format</p>
               <p>
@@ -319,7 +323,7 @@ Id of the end user on the target PMS / OTA system
 </p>
               <p>Note: If the proxy target does not support the endpoint, the response will be returned with the data and raw fields as empty arrays</p>
           </section>
-          <section class="mt-4" id="errors">
+          <section class="mt-5" id="errors">
 <p class="lead">Errors</p>
               <p>Errors are returned with the appropriate error code and message</p>
               <p>
@@ -335,12 +339,61 @@ Id of the end user on the target PMS / OTA system
           </section>
 
 	      
-	      <section class="mt-4" id="authentication">
+	      <section class="mt-5" id="authentication">
           <h3>Endpoints</h3>
 <p class="lead">Authentication</p>
 		      <h6>Context</h6>
 		      <p>This endpoint is used to obtain authentication tokens from the target PMS.  The authentication token is then used in future requests (ie passed in the header as X-WEAVE-PROXY-ACCESS-TOKEN)</p>
-<h6>Path</h6>
+
+          <dl class="row">
+            <dt class="col-sm-3">Path</dt>
+            <dd class="col-sm-9"><p><code>/accessTokens</code></p></dd>
+
+            <dt  class="col-sm-3">Request type</dt>
+            <dd class="col-sm-9">POST</dd>
+
+            <dt class="col-sm-3">Headers</dt>
+            <dd class="col-sm-9">Content-type: application/json</dd>
+
+            <dt class="col-sm-3">Search parameters</dt>
+            <dd class="col-sm-9">None</dd>
+
+            <dt class="col-sm-3">Body</dt>
+            <dd class="col-sm-9">
+              <p><span class="fw-semibold">client_id:</span> PMS user client id</p>
+              <p><span class="fw-semibold">client_secret:</span> PMS user client secret</p>
+            </dd>
+
+            <dt class="col-sm-3">Results</dt>
+            <dd class="col-sm-9">
+              <pre>
+<code>
+{
+  status: true/false,
+  data: [
+    {
+      access_token: ‘xs34…’	// access token to be used in future requests in the X-WEAVE-PROXY-ACCESS-TOKEN header field
+      expiry: 1749275583083	// expiry time of the access_token presented as the number of milliseconds since the beginning of the UNIX epoch
+    }
+  ],
+  raw: …. 	
+}
+</code>
+              </pre>
+            </dd>
+
+            <dt class="col-sm-3">Supported destinations</dt>
+            <dd class="col-sm-9" >
+              <ul>
+                <li>Hostaway</li>
+                <li>Hospitable</li>
+              </ul>
+            </dd>
+            
+          </dl>
+          
+          <!--
+          <h6>Path</h6>
 		      <p><code>/accessTokens</code></p>
 		      <h6>Request type</h6>
 		      <p>POST</p>
@@ -371,8 +424,10 @@ Id of the end user on the target PMS / OTA system
 			      <li>Hostaway</li>
 			      <li>Hospitable</li>
 		      </ul>
+
+          -->
 	      </section>
-	      <section class="mt-4" id="listings">
+	      <section class="mt-5" id="listings">
 		<p class="lead">Listing</p>
 		      <h6>Context</h6>
 		      <p>Request listings from PMS</p>
