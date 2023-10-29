@@ -19,7 +19,16 @@
 <meta name="theme-color" content="#712cf9">
 -->
     <style>
-      code {
+      body {
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      .main-text {
+        overflow-y: auto;
+      }
+      
+      .code {
         background-color: #f1f1f1;
         width: 100%;
       }
@@ -109,7 +118,7 @@
 
   <body>
 <div class="d-flex">
-    <div class="flex-shrink-0 p-3 position-static" style="width: 280px;">
+    <div class="flex-shrink-0 p-3 fixed-sidebar" style="width: 280px;">
         <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
             <img src="/img/weave_logo.png" alt="Weave" width="30" height="24" > 
 <!--          <svg class="bi pe-none me-2" width="30" height="24"><use xlink:href="#bootstrap"></use></svg> -->
@@ -178,11 +187,12 @@
           </li>
         </ul>
       </div>
-      <div class="p-2 w-75">
+      <div class="p-2 w-75 main-text">
           <section class="mt-5" id="introduction">
 <h3> Background</h3>
-<p>Weave is an API aggregator for the Travel Tech industry.  Weave enables applications to integrate with a number of different service providers using a single API.  </p>
-<p> When the underlying service provider APIs change, the integrations built using Weave will be updated with minimal to no development effort by application developers.  Weave will continue to support previous versions of its own API endpoints for a predetermined period of time to enable developers sufficient time to plan and execute updates to their product roadmaps</p>
+<p>Weave is an API aggregator for the travel tech industry.  Weave enables applications to integrate with a number of different service providers using a single API.  </p>
+<p> When the underlying service provider APIs change, the integrations built using Weave will be updated with minimal to no development effort by application developers.</p>
+<p>Weave will continue to support previous versions of its own API endpoints for a predetermined period of time to enable developers sufficient time to plan and execute updates to their product roadmaps</p>
           </section>
           
           <section class="mt-5" id="domain">
@@ -205,6 +215,7 @@
             <p>Additional parameters for the request, for example authentication tokens and request destinations</p>
             <p>
                 Example
+<div class="code">
 <pre>
   <code>
 curl -X GET \ 
@@ -215,6 +226,7 @@ curl -X GET \
       -H 'Cache-control: no-cache’ \                                   // Additional header commands    
   </code>
 </pre>
+</div>
             </p>
           </section>
           
