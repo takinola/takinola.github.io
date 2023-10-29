@@ -99,7 +99,7 @@
 
     
     <!-- Custom styles for this template -->
-<!--    <link href="/css/sidebars.css" rel="stylesheet"> -->
+    <link href="/css/sidebars.css" rel="stylesheet">
   </head>
 
   <body>
@@ -112,7 +112,7 @@
         </a>
         <ul class="list-unstyled ps-0">
             <li class="mb-1">
-                <a class="btn text-decoration-none href="#introduction">Introduction</a>
+                <a class="btn text-decoration-none" href="#introduction">Introduction</a>
             </li>
             <li class="mb-1">
             <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
@@ -129,27 +129,31 @@
           </li>
           <li class="mb-1">
             <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-              Dashboard
+              Context
             </button>
             <div class="collapse" id="dashboard-collapse">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Overview</a></li>
-                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Weekly</a></li>
-                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Monthly</a></li>
-                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Annually</a></li>
+                <li><a href="#integrations" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Integrations</a></li>
+                <li><a href="#origin" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Origin</a></li>
+                <li><a href="#api_version" class="link-body-emphasis d-inline-flex text-decoration-none rounded">API Version</a></li>
+                <li><a href="#api_headers" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Headers</a></li>
+                <li><a href="#returned_data" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Returned Data</a></li>
+                <li><a href="#errors" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Errors</a></li>
               </ul>
             </div>
           </li>
           <li class="mb-1">
             <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-              Orders
+              Endpoints
             </button>
             <div class="collapse" id="orders-collapse">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New</a></li>
-                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Processed</a></li>
-                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Shipped</a></li>
-                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Returned</a></li>
+                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Authentication</a></li>
+                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Listings</a></li>
+                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Calendar</a></li>
+                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Reservations</a></li>
+                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Users</a></li>
+                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Reviews</a></li>
               </ul>
             </div>
           </li>
@@ -171,26 +175,26 @@
       </div>
       <div class="p-2 w-75">
           <section id="introduction">
-<p class="lead"> Background</p>
+<h3> Background</h3>
 <p>Weave is an API aggregator for the Travel Tech industry.  Weave enables applications to integrate with a number of different service providers using a single API.  When the underlying service provider APIs change, the integrations built using Weave will be updated with minimal to no development effort by application developers.  Weave will continue to support previous versions of its own API endpoints for a predetermined period of time to enable developers sufficient time to plan and execute updates to their product roadmaps</p>
           </section>
-          <h2>API Design</h2>
+          <h3>API Design</h3>
           <section id="domain">
-            <h3>Domain</h3>
+            <p class="lead">Domain</p>
               <p>Requests are made to the Weave API domain eg https://use1.weaveapi.com</p>
             <p>Requests can only be made using SSL enabled connections</p>
           </section>
           <section id="api_version">
-              <h3>API Versions</h3>
+              <p class="lead">API Versions</p>
               <p>Requests will specify the Weave API version being used.  If the version is omitted (or is invalid), Weave will default to the latest API version.</p>
               <p>Deprecation schedule: Weave will support 2 previous versions for a period of 6 months before deprecation</p>
           </section>
           <section id="endpoints">
-            <h3>Endpoints</h3>
+            <p class="lead">Endpoints</p>
             <p>Each API will have an end point eg /listings.  End points may require additional query parameters (for GET requests) or body parameters (for POST requests).</p>
           </section>
           <section id="headers">
-            <h3>Headers</h3>
+            <p class="lead">Headers</p>
             <p>Additional parameters for the request, for example authentication tokens and request destinations</p>
             <p>
                 Example
@@ -201,6 +205,115 @@ curl -X GET \
       -H 'Destination- auth: Hostaway access token’  \                 // Proxied PMS access token 
       -H 'Cache-control: no-cache’ \                                              // Additional header commands
             </p>
+          </section>
+          <h3>Context</h3>
+          <section id="integrations">
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">Type</th>
+                        <th scope="col">Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>PMS</td>
+                        <td>Guesty for Hosts</td>
+                    </tr>
+                    <tr>
+                        <td>PMS</td>
+                        <td>Hostaway</td>
+                    </tr>
+                    <tr>
+                        <td>PMS</td>
+                        <td>Hospitable</td>
+                    </tr>
+                    <tr>
+                        <td>PMS</td>
+                        <td>Hostfully</td>
+                    </tr>       
+                    <tr>
+                        <td>PMS</td>
+                        <td>Lodgify</td>
+                    </tr>
+                    <tr>
+                        <td>PMS</td>
+                        <td>Lodgix</td>
+                    </tr>                    
+                    <tr>
+                        <td>PMS</td>
+                        <td>Smoobu</td>
+                    </tr>
+                    <tr>
+                        <td>PMS</td>
+                        <td>Uplisting</td>
+                    </tr>
+                </tbody>
+            </table>
+          </section>
+          <section id="origin">
+          <p class="lead">Origin</p>
+        <p>Origin for all requests will be:
+https://use1.weaveapi.com
+</p>
+          </section>
+          <section id="api_version">
+            <p class="lead">API Version</p>
+              <p>Current API version is “v1”</p>
+              <p>Request paths should be prefixed with the API version ie  “/api/v1/endpoint/path”</p>
+          </section>
+          <section id="api_headers">
+            <p class="lead">Headers</p>
+              <p>The following headers need to be included with each request</p>
+              <p>X-WEAVE-APIKEY 
+Unique API key assigned to each Weave customer
+</p>
+<p>X-WEAVE-PROXY-DESTINATION
+PMS target for the request.  Current options are:
+</p>
+              <ul>
+                  <li>guesty_for_hosts</li>
+                  <li>hostaway</li>
+                  <li>hospitable</li>
+                  <li>hostfully</li>
+                  <li>lodgify</li>
+                  <li>lodgix</li>
+                  <li>smoobu</li>
+                  <li>uplisting</li>
+              </ul>
+
+              <p>X-WEAVE-PROXY-PARTNER-KEY
+API key issued to customer by the PMS / OTA target
+</p>
+
+              <p>X-WEAVE-CLIENT-ID
+Id of the end user on the target PMS / OTA system
+</p>
+
+              <p>X-WEAVE-PROXY-ACCESS-TOKEN
+(optional) Access token granted by target PMS / OTA system
+</p>
+          </section>
+
+          <section id="returned_data">
+              <p class="lead">Returned data</p>
+<p>Data is always returned in the format</p>
+              <p>{
+	data: [ array of normalized data ],
+raw:  [ raw data as returned by the proxy ]
+status:  [ true / false indication of success of request ] 
+}
+</p>
+              <p>Note: If the proxy target does not support the endpoint, the response will be returned with the data and raw fields as empty arrays</p>
+          </section>
+          <section id="errors">
+<p class="lead">Errors</p>
+              <p>Errors are returned with the appropriate error code and message</p>
+              <p>{
+	status: false
+proxy_message: “......”		// error message returned from target
+}
+</p>
           </section>
       </div>
     </div>
