@@ -1,25 +1,13 @@
 <!doctype html>
 <html lang="en">
 <head>
-<!-- 
-    <script src="/docs/5.3/assets/js/color-modes.js"></script> 
--->
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<!--
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.118.2">
--->
     <title>Weave API Documentation</title>
-<!--
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sidebars/">
--->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
-<link href="/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<link rel="icon" href="/img/weave_favicon.png">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="icon" href="/img/weave_favicon.png">
     <!-- Favicons -->
 <!--
 <link rel="apple-touch-icon" href="/docs/5.3/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
@@ -111,7 +99,7 @@
 
     
     <!-- Custom styles for this template -->
-    <link href="/css/sidebars.css" rel="stylesheet">
+<!--    <link href="/css/sidebars.css" rel="stylesheet"> -->
   </head>
 
   <body>
@@ -132,9 +120,10 @@
             </button>
             <div class="collapse show" id="home-collapse" style="">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Overview</a></li>
-                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Updates</a></li>
-                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Reports</a></li>
+                <li><a href="#domain" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Domain</a></li>
+                <li><a href="#api_version" class="link-body-emphasis d-inline-flex text-decoration-none rounded">API version</a></li>
+                <li><a href="#endpoints" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Endpoints</a></li>
+                <li><a href="#headers" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Headers</a></li>
               </ul>
             </div>
           </li>
@@ -184,6 +173,34 @@
           <section id="introduction">
 <p class="lead"> Background</p>
 <p>Weave is an API aggregator for the Travel Tech industry.  Weave enables applications to integrate with a number of different service providers using a single API.  When the underlying service provider APIs change, the integrations built using Weave will be updated with minimal to no development effort by application developers.  Weave will continue to support previous versions of its own API endpoints for a predetermined period of time to enable developers sufficient time to plan and execute updates to their product roadmaps</p>
+          </section>
+          <h2>API Design</h2>
+          <section id="domain">
+            <h3>Domain</h3>
+              <p>Requests are made to the Weave API domain eg https://use1.weaveapi.com</p>
+            <p>Requests can only be made using SSL enabled connections</p>
+          </section>
+          <section id="api_version">
+              <h3>API Versions</h3>
+              <p>Requests will specify the Weave API version being used.  If the version is omitted (or is invalid), Weave will default to the latest API version.</p>
+              <p>Deprecation schedule: Weave will support 2 previous versions for a period of 6 months before deprecation</p>
+          </section>
+          <section id="endpoints">
+            <h3>Endpoints</h3>
+            <p>Each API will have an end point eg /listings.  End points may require additional query parameters (for GET requests) or body parameters (for POST requests).</p>
+          </section>
+          <section id="headers">
+            <h3>Headers</h3>
+            <p>Additional parameters for the request, for example authentication tokens and request destinations</p>
+            <p>
+                Example
+curl -X GET \ 
+      https://use1.weaveapi.com/v1/reservations/1234 \                 // Weave API endpoint
+      -H 'Authorization: Bearer myaccesstoken’  \                         // Weave API access token
+      -H 'Destination: hostaway’                                                    // Proxied PMS
+      -H 'Destination- auth: Hostaway access token’  \                 // Proxied PMS access token 
+      -H 'Cache-control: no-cache’ \                                              // Additional header commands
+            </p>
           </section>
       </div>
     </div>
