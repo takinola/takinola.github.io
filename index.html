@@ -176,10 +176,12 @@
       <div class="p-2 w-75">
           <section class="mt-4" id="introduction">
 <h3> Background</h3>
-<p>Weave is an API aggregator for the Travel Tech industry.  Weave enables applications to integrate with a number of different service providers using a single API.  When the underlying service provider APIs change, the integrations built using Weave will be updated with minimal to no development effort by application developers.  Weave will continue to support previous versions of its own API endpoints for a predetermined period of time to enable developers sufficient time to plan and execute updates to their product roadmaps</p>
+<p>Weave is an API aggregator for the Travel Tech industry.  Weave enables applications to integrate with a number of different service providers using a single API.  </p>
+<p> When the underlying service provider APIs change, the integrations built using Weave will be updated with minimal to no development effort by application developers.  Weave will continue to support previous versions of its own API endpoints for a predetermined period of time to enable developers sufficient time to plan and execute updates to their product roadmaps</p>
           </section>
-          <h3>API Design</h3>
+          
           <section class="mt-4" id="domain">
+            <h3>API Design</h3>
             <p class="lead">Domain</p>
               <p>Requests are made to the Weave API domain eg <code>https://use1.weaveapi.com</code></p>
             <p>Requests can only be made using SSL enabled connections</p>
@@ -191,23 +193,28 @@
           </section>
           <section class="mt-4" id="endpoints">
             <p class="lead">Endpoints</p>
-            <p>Each API will have an end point eg /listings.  End points may require additional query parameters (for GET requests) or body parameters (for POST requests).</p>
+            <p>Each API will have an end point eg <code>/listings</code>.  End points may require additional query parameters (for GET requests) or body parameters (for POST requests).</p>
           </section>
           <section class="mt-4" id="headers">
             <p class="lead">Headers</p>
             <p>Additional parameters for the request, for example authentication tokens and request destinations</p>
             <p>
                 Example
+<pre>
+  <code>
 curl -X GET \ 
       https://use1.weaveapi.com/v1/reservations/1234 \                 // Weave API endpoint
-      -H 'Authorization: Bearer myaccesstoken’  \                         // Weave API access token
-      -H 'Destination: hostaway’                                                    // Proxied PMS
+      -H 'Authorization: Bearer myaccesstoken’  \                      // Weave API access token
+      -H 'Destination: hostaway’                                       // Proxied PMS
       -H 'Destination- auth: Hostaway access token’  \                 // Proxied PMS access token 
-      -H 'Cache-control: no-cache’ \                                              // Additional header commands
+      -H 'Cache-control: no-cache’ \                                   // Additional header commands    
+  </code>
+</pre>
             </p>
           </section>
-          <h3>Context</h3>
+          
           <section class="mt-4" id="integrations">
+            <h3>Context</h3>
 		  <p class="lead">Integrations</p>
             <table class="table">
                 <thead>
@@ -254,22 +261,21 @@ curl -X GET \
           </section>
           <section class="mt-4" id="origin">
           <p class="lead">Origin</p>
-        <p>Origin for all requests will be:
-https://use1.weaveapi.com
+        <p>Origin for all requests will be: <code>https://use1.weaveapi.com</code>
 </p>
           </section>
           <section class="mt-4" id="api_version">
             <p class="lead">API Version</p>
               <p>Current API version is “v1”</p>
-              <p>Request paths should be prefixed with the API version ie  “/api/v1/endpoint/path”</p>
+              <p>Request paths should be prefixed with the API version ie  <code>“/api/v1/endpoint/path”</code></p>
           </section>
           <section class="mt-4" id="api_headers">
             <p class="lead">Headers</p>
               <p>The following headers need to be included with each request</p>
-              <p>X-WEAVE-APIKEY 
+              <p><span class="fw-semibold">X-WEAVE-APIKEY</span> 
 Unique API key assigned to each Weave customer
 </p>
-<p>X-WEAVE-PROXY-DESTINATION
+<p><span class="fw-semibold">X-WEAVE-PROXY-DESTINATION</span>
 PMS target for the request.  Current options are:
 </p>
               <ul>
@@ -283,15 +289,15 @@ PMS target for the request.  Current options are:
                   <li>uplisting</li>
               </ul>
 
-              <p>X-WEAVE-PROXY-PARTNER-KEY
+              <p><span class="fw-semibold">X-WEAVE-PROXY-PARTNER-KEY</span>
 API key issued to customer by the PMS / OTA target
 </p>
 
-              <p>X-WEAVE-CLIENT-ID
+              <p><span class="fw-semibold">X-WEAVE-CLIENT-ID</span>
 Id of the end user on the target PMS / OTA system
 </p>
 
-              <p>X-WEAVE-PROXY-ACCESS-TOKEN
+              <p><span class="fw-semibold">X-WEAVE-PROXY-ACCESS-TOKEN</span>
 (optional) Access token granted by target PMS / OTA system
 </p>
           </section>
@@ -299,31 +305,43 @@ Id of the end user on the target PMS / OTA system
           <section class="mt-4" id="returned_data">
               <p class="lead">Returned data</p>
 <p>Data is always returned in the format</p>
-              <p>{
+              <p>
+<pre>
+  <code>
+{
 	data: [ array of normalized data ],
-raw:  [ raw data as returned by the proxy ]
-status:  [ true / false indication of success of request ] 
+  raw:  [ raw data as returned by the proxy ]
+  status:  [ true / false indication of success of request ] 
 }
+  </code>
+</pre>
+
 </p>
               <p>Note: If the proxy target does not support the endpoint, the response will be returned with the data and raw fields as empty arrays</p>
           </section>
           <section class="mt-4" id="errors">
 <p class="lead">Errors</p>
               <p>Errors are returned with the appropriate error code and message</p>
-              <p>{
+              <p>
+<pre>
+  <code>
+{
 	status: false
-proxy_message: “......”		// error message returned from target
+  proxy_message: “......”		// error message returned from target
 }
+  </code>
+</pre>
 </p>
           </section>
 
-	      <h3>Endpoints</h3>
+	      
 	      <section class="mt-4" id="authentication">
+          <h3>Endpoints</h3>
 <p class="lead">Authentication</p>
 		      <h6>Context</h6>
 		      <p>This endpoint is used to obtain authentication tokens from the target PMS.  The authentication token is then used in future requests (ie passed in the header as X-WEAVE-PROXY-ACCESS-TOKEN)</p>
 <h6>Path</h6>
-		      <p>/accessTokens</p>
+		      <p><code>/accessTokens</code></p>
 		      <h6>Request type</h6>
 		      <p>POST</p>
 		      <h6>Headers</h6>
@@ -331,20 +349,22 @@ proxy_message: “......”		// error message returned from target
 		      <h6>Search parameters</h6>
 		      <p>None</p>
 		      <h6>Body</h6>
-		      <p>client_id: PMS user client id</p>
-<p>client_secret: PMS user client secret</p>
+		      <p><span class="fw-semibold">client_id:</span> PMS user client id</p>
+<p><span class="fw-semibold">client_secret:</span> PMS user client secret</p>
 		      <h6>Results</h6>
-		      <pre>
-			{
-			  status: true/false,
-			  data: [
-			    {
-			      access_token: ‘xs34…’	// access token to be used in future requests in the X-WEAVE-PROXY-ACCESS-TOKEN header field
-			      expiry: 1749275583083	// expiry time of the access_token presented as the number of milliseconds since the beginning of the UNIX epoch
-			    }
-			  ],
-			  raw: …. 	
+<pre>
+  <code>
+  {
+	  status: true/false,
+		data: [
+		  {
+			  access_token: ‘xs34…’	// access token to be used in future requests in the X-WEAVE-PROXY-ACCESS-TOKEN header field
+			  expiry: 1749275583083	// expiry time of the access_token presented as the number of milliseconds since the beginning of the UNIX epoch
 			}
+		],
+		raw: …. 	
+	}
+  </code>
 			</pre>
 <h6>Supported destinations</h6>
 		      <ul>
@@ -357,29 +377,32 @@ proxy_message: “......”		// error message returned from target
 		      <h6>Context</h6>
 		      <p>Request listings from PMS</p>
 		      <h6>Path</h6>
-		      <p>/listings</p>
+		      <p><code>/listings</code></p>
 		      <h6>Request type</h6>
 		      <p>GET</p>
 		      <h6>Headers</h6>
 		      <p>Content-type: application/json</p>
 		      <h6>Search parameters</h6>
-		      <p>listingId: PMS id of the listing</p>
+		      <p><span class="fw-semibold">listingId:</span> PMS id of the listing</p>
 		      <h6>Results</h6>
 		      <pre>
-			{
-			  status: true/false,
-			  data: [
-			    {
-				// listing object
-			    }
-			  ],
-			  raw: {
-				// raw response from PMS
-			  }	
-			}
+  <code>
+  {
+    status: true/false,
+    data: [
+      {
+    // listing object
+      }
+    ],
+    raw: {
+    // raw response from PMS
+    }	
+  }    
+  </code>
+
 		      </pre>
 		      <h6>Example</h6>
-		      <p>https://use1.weaveapi.com/api/v1/listings/listingId=1234</p>
+		      <p><code>https://use1.weaveapi.com/api/v1/listings/listingId=1234</code></p>
 		      <h6>Supported destinations</h6>
 		      <ul>
 			      <li>Guesty for Hosts</li>
