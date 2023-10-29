@@ -197,9 +197,9 @@
 <pre><code>
 curl -X GET \ 
       https://use1.weaveapi.com/v1/reservations/1234 \                 // Weave API endpoint
-      -H 'Authorization: Bearer myaccesstoken’  \                      // Weave API access token
-      -H 'Destination: hostaway’ \                                     // Proxied PMS
-      -H 'Destination- auth: Hostaway access token’  \                 // Proxied PMS access token 
+      -H 'X-WEAVE-APIKEY: myweaveapikey’  \                            // Weave API access token
+      -H 'X-WEAVE-PROXY-DESTINATION: hostaway’ \                       // Proxied PMS
+      -H 'X-WEAVE-PROXY-ACCESS-TOKEN: Hostaway access token’  \        // Proxied PMS access token 
       -H 'Cache-control: no-cache’ \                                   // Additional header commands    
 </code></pre>
 </div>
