@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Weave API Documentation</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"> -->
 
     <link href="/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="icon" href="/img/weave_favicon.png">
@@ -393,45 +393,62 @@ Id of the end user on the target PMS / OTA system
             
           </dl>
           
-          <!--
-          <h6>Path</h6>
-		      <p><code>/accessTokens</code></p>
-		      <h6>Request type</h6>
-		      <p>POST</p>
-		      <h6>Headers</h6>
-		      <p>Content-type: application/json</p>
-		      <h6>Search parameters</h6>
-		      <p>None</p>
-		      <h6>Body</h6>
-		      <p><span class="fw-semibold">client_id:</span> PMS user client id</p>
-<p><span class="fw-semibold">client_secret:</span> PMS user client secret</p>
-		      <h6>Results</h6>
-<pre>
-  <code>
-  {
-	  status: true/false,
-		data: [
-		  {
-			  access_token: ‘xs34…’	// access token to be used in future requests in the X-WEAVE-PROXY-ACCESS-TOKEN header field
-			  expiry: 1749275583083	// expiry time of the access_token presented as the number of milliseconds since the beginning of the UNIX epoch
-			}
-		],
-		raw: …. 	
-	}
-  </code>
-			</pre>
-<h6>Supported destinations</h6>
-		      <ul>
-			      <li>Hostaway</li>
-			      <li>Hospitable</li>
-		      </ul>
-
-          -->
 	      </section>
 	      <section class="mt-5" id="listings">
 		<p class="lead">Listing</p>
-		      <h6>Context</h6>
+          <h6>Context</h6>
 		      <p>Request listings from PMS</p>
+		      <dl class="row">
+			      <dt class="col-sm-3">Path</dt>
+            <dd class="col-sm-9"><code>/listings</code></dd>
+
+            <dt class="col-sm-3">Request type</dt>
+            <dd class="col-sm-9">GET</dd>
+
+            <dt class="col-sm-3">Headers</dt>
+            <dd class="col-sm-9">Content-type: application/json</dd>
+
+            <dt class="col-sm-3">Search parameters</dt>
+            <dd class="col-sm-9"><p><span class="fw-semibold">listingId: </span>PMS id of the listing</p></dd>
+
+            <dt class="col-sm-3">Results</dt>
+            <dd class="col-sm-9">
+              <pre>
+<code>
+{
+  status: true/false,
+  data: [
+    {
+  // listing object
+    }
+  ],
+  raw: {
+  // raw response from PMS
+  }	
+}   
+</code>
+              </pre>
+            </dd>
+
+            <dt class="col-sm-3">Example</dt>
+            <dd class="col-sm-9"><p><code>https://use1.weaveapi.com/api/v1/listings/listingId=1234</code></p></dd>
+
+            <dt class="col-sm-3">Supported destinations</dt>
+            <dd class="col-sm-9">
+              <ul>
+    			      <li>Guesty for Hosts</li>
+    			      <li>Hostaway</li>
+    			      <li>Hospitable</li>
+    			      <li>Lodgify</li>
+    			      <li>Lodgix</li>
+    			      <li>Smoobu</li>
+    			      <li>Uplisting</li>
+    		      </ul>
+            </dd>
+          </dl>
+		      
+		      
+<!--
 		      <h6>Path</h6>
 		      <p><code>/listings</code></p>
 		      <h6>Request type</h6>
@@ -469,6 +486,8 @@ Id of the end user on the target PMS / OTA system
 			      <li>Smoobu</li>
 			      <li>Uplisting</li>
 		      </ul>
+
+          -->
 	      </section>
       </div>
     </div>
