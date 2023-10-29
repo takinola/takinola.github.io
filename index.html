@@ -132,7 +132,7 @@
             </div>
           </li>
           <li class="mb-1">
-            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="true">
               Context
             </button>
             <div class="collapse" id="dashboard-collapse">
@@ -147,7 +147,7 @@
             </div>
           </li>
           <li class="mb-1">
-            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
+            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="true">
               Endpoints
             </button>
             <div class="collapse" id="orders-collapse">
@@ -158,20 +158,6 @@
                 <li><a href="#reservations" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Reservations</a></li>
                 <li><a href="#users" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Users</a></li>
                 <li><a href="#reviews" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Reviews</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="border-top my-3"></li>
-          <li class="mb-1">
-            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-              Account
-            </button>
-            <div class="collapse" id="account-collapse">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New...</a></li>
-                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Profile</a></li>
-                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Settings</a></li>
-                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign out</a></li>
               </ul>
             </div>
           </li>
@@ -203,21 +189,19 @@
           <section class="mt-5" id="headers">
             <p class="lead">Headers</p>
             <p>Additional parameters for the request, for example authentication tokens and request destinations</p>
-            <p>
-                Example
+            <p>Example</p>
+<code>
 <div class="code">
 <pre>
-  <code>
 curl -X GET \ 
       https://use1.weaveapi.com/v1/reservations/1234 \                 // Weave API endpoint
       -H 'Authorization: Bearer myaccesstoken’  \                      // Weave API access token
       -H 'Destination: hostaway’ \                                     // Proxied PMS
       -H 'Destination- auth: Hostaway access token’  \                 // Proxied PMS access token 
       -H 'Cache-control: no-cache’ \                                   // Additional header commands    
-  </code>
 </pre>
 </div>
-            </p>
+</code>
           </section>
           
           <section class="mt-5" id="integrations">
