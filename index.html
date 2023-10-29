@@ -458,48 +458,46 @@ Id of the end user on the target PMS / OTA system
     		      </ul>
             </dd>
           </dl>
-		      
-		      
-<!--
-		      <h6>Path</h6>
-		      <p><code>/listings</code></p>
-		      <h6>Request type</h6>
-		      <p>GET</p>
-		      <h6>Headers</h6>
-		      <p>Content-type: application/json</p>
-		      <h6>Search parameters</h6>
-		      <p><span class="fw-semibold">listingId:</span> PMS id of the listing</p>
-		      <h6>Results</h6>
-		      <pre>
-  <code>
-  {
-    status: true/false,
-    data: [
-      {
-    // listing object
-      }
-    ],
-    raw: {
-    // raw response from PMS
-    }	
-  }    
-  </code>
+	      </section>
+	      <section class="mt-5" id="calendar">
+          <p class="lead">Calendar</p>
+          <h6>Context</h6>
+          <p>Request daily calendar from PMS</p>
 
-		      </pre>
-		      <h6>Example</h6>
-		      <p><code>https://use1.weaveapi.com/api/v1/listings/listingId=1234</code></p>
-		      <h6>Supported destinations</h6>
-		      <ul>
-			      <li>Guesty for Hosts</li>
-			      <li>Hostaway</li>
-			      <li>Hospitable</li>
-			      <li>Lodgify</li>
-			      <li>Lodgix</li>
-			      <li>Smoobu</li>
-			      <li>Uplisting</li>
-		      </ul>
+          <dl class="row">
+            <dt class="col-sm-3">Path</dt>
+            <dd class="col-sm-9"><p><code>/calendar</code></p></dd>
 
-          -->
+            <dt class="col-sm-3">Request type</dt>
+            <dd class="col-sm-9">GET</dd>
+
+            <dt class="col-sm-3">Headers</dt>
+            <dd class="col-sm-9">Content-type: application/json</dd>
+
+            <dt class="col-sm-3">Search parameters</dt>
+            <dd class="col-sm-9">
+              <p><span class="fw-semibold">listingId:</span> (required) PMS id of the listing </p>
+              <p><span class="fw-semibold">startDate:</span>  return listings beginning from this date (yyyy-mm-dd)</p>
+              <p><span class="fw-semibold">endDate:</span>  return listings up to this date (yyyy-mm-dd)</p>
+            </dd>
+
+            <dt class="col-sm-3">Example</dt>
+            <dd class="col-sm-9"><p><code>https://use1.weaveapi.com/api/v1/calendar?listingId=1234&startDate=2023-07-01&endDate=2023-07-31</code></p></dd>
+
+            <dt class="col-sm-3">Supported destinations</dt>
+            <dd class="col-sm-9">
+              <ul>
+                <li>Guesty for Hosts</li>
+                <li>Hostaway</li>
+                <li>Hospitable</li>
+                <li>Hostfully</li>
+                <li>Lodgify</li>
+                <li>Lodgix</li>
+                <li>Uplisting</li>
+              </ul>
+            </dd>
+            
+          </dl>
 	      </section>
       </div>
     </div>
