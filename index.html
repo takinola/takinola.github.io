@@ -498,6 +498,49 @@ Id of the end user on the target PMS / OTA system
             
           </dl>
 	      </section>
+
+	      <section class="mt-5" id="reservations">
+		      <p class="lead">Reservations</p>
+		      <h6>Context</h6>
+		      <p>Request reservations from PMS</p>
+
+          <dl class="row">
+            <dt class="col-sm-3">Path</dt>
+            <dd class="col-sm-9"><p><code>/reservations</code></p></dd>
+
+            <dt class="col-sm-3">Request type</dt>
+            <dd class="col-sm-9">GET</dd>
+
+            <dt class="col-sm-3">Headers</dt>
+            <dd class="col-sm-9">Content-type: application/json</dd>
+
+            <dt class="col-sm-3">Search parameters</dt>
+            <dd class="col-sm-9">
+              <p><span class="fw-semibold">listingId:</span> PMS id of listing for which the reservations are being requested</p>
+              <p><span class="fw-semibold">reservationId:</span>  PMS id of reservation being requested (NOTE: not all PMS will respect the reservationId filter so you should expect the response to contain an array of reservations)</p>
+              <p><span class="fw-semibold">startDate:</span>  return listings beginning from this date (yyyy-mm-dd)</p>
+              <p><span class="fw-semibold">endDate:</span>  return listings up to this date (yyyy-mm-dd)</p>
+            </dd>
+
+            <dt class="col-sm-3">Example</dt>
+            <dd class="col-sm-9"><p><code>https://use1.weaveapi.com/api/v1/reservations?reservationId=1234&listingId=9876&arrivalStartDate=2023–07-01&arrivalEndDate=2023-07-31</code></p></dd>
+
+            <dt class="col-sm-3">Supported destinations</dt>
+            <dd class="col-sm-9">
+              <ul>
+                <li>Guesty for Hosts</li>
+                <li>Hostaway</li>
+                <li>Hospitable</li>
+                <li>Hostfully</li>
+                <li>Lodgify</li>
+                <li>Lodgix</li>
+                <li>Smoobu</li>
+                <li>Uplisting</li>
+              </ul>
+            </dd>
+            
+          </dl>
+	      </section>
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
