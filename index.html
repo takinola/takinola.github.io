@@ -1,116 +1,123 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Weave API Documentation</title>
-
     <link href="/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link href="/css/site_style.css" rel="stylesheet">
     <link rel="icon" href="/img/weave_favicon.png">
-
-    
     <!-- Custom styles for this template -->
     <link href="/css/sidebars.css" rel="stylesheet">
-  </head>
+</head>
 
-  <body>
-<!-- Google Analytics Tag -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZLM18JZQ0"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<body>
+    <!-- Google Analytics Tag -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZLM18JZQ0"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
 
-  gtag('config', 'G-9ZLM18JZQ0');
-</script>
-<!-- --------------------- -->
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-	  
-<div class="d-flex">
-    <div class="flex-shrink-0 p-3 fixed-sidebar" style="width: 280px;">
-        <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
-            <img src="/img/weave_logo.png" alt="Weave" width="30" height="24" > 
-          <span class="fs-5 fw-semibold">Weave API</span>
-        </a>
-        <ul class="list-unstyled ps-0">
-            <li class="mb-1">
-                <a class="btn text-decoration-none" href="#introduction">Introduction</a>
-            </li>
-            <li class="mb-1">
-            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-              API Design
-            </button>
-            <div class="collapse show" id="home-collapse" style="">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#domain" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Domain</a></li>
-                <li><a href="#api_version" class="link-body-emphasis d-inline-flex text-decoration-none rounded">API version</a></li>
-                <li><a href="#endpoints" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Endpoints</a></li>
-                <li><a href="#headers" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Headers</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="mb-1">
-            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="true">
-              Context
-            </button>
-            <div class="collapse show" id="dashboard-collapse">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#integrations" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Integrations</a></li>
-                <li><a href="#origin" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Origin</a></li>
-                <li><a href="#api_version" class="link-body-emphasis d-inline-flex text-decoration-none rounded">API Version</a></li>
-                <li><a href="#api_headers" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Headers</a></li>
-                <li><a href="#returned_data" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Returned Data</a></li>
-                <li><a href="#errors" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Errors</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="mb-1">
-            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="true">
-              Endpoints
-            </button>
-            <div class="collapse show" id="orders-collapse">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#authentication" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Authentication</a></li>
-                <li><a href="#listings" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Listings</a></li>
-                <li><a href="#calendar" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Calendar</a></li>
-                <li><a href="#reservations" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Reservations</a></li>
-                <li><a href="#users" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Users</a></li>
-                <li><a href="#reviews" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Reviews</a></li>
-              </ul>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="p-2 w-auto main-text">
-          <section class="mt-5" id="introduction">
-<h3> Background</h3>
-<p>Weave is an API aggregator for the travel tech industry.  Weave enables applications to integrate with a number of different service providers using a single API.  </p>
-<p> When the underlying service provider APIs change, the integrations built using Weave will be updated with minimal to no development effort by application developers.</p>
-<p>Weave will continue to support previous versions of its own API endpoints for a predetermined period of time to enable developers sufficient time to plan and execute updates to their product roadmaps</p>
-          </section>
-          
-          <section class="mt-5" id="domain">
-            <h3>API Design</h3>
-            <p class="lead">Domain</p>
-              <p>Requests are made to the Weave API domain eg <code>https://use1.weaveapi.com</code></p>
-            <p>Requests can only be made using SSL enabled connections</p>
-          </section>
-          <section class="mt-5" id="api_version">
-              <p class="lead">API Versions</p>
-              <p>Requests will specify the Weave API version being used.  If the version is omitted (or is invalid), Weave will default to the latest API version.</p>
-              <p>Deprecation schedule: Weave will support 2 previous versions for a period of 6 months before deprecation</p>
-          </section>
-          <section class="mt-5" id="endpoints">
-            <p class="lead">Endpoints</p>
-            <p>Each API will have an end point eg <code>/listings</code>.  End points may require additional query parameters (for GET requests) or body parameters (for POST requests).</p>
-          </section>
-          <section class="mt-5" id="headers">
-            <p class="lead">Headers</p>
-            <p>Additional parameters for the request, for example authentication tokens and request destinations</p>
-            <p>Example</p>
+    gtag('config', 'G-9ZLM18JZQ0');
+    </script>
+    <!-- --------------------- -->
+    <div class="d-flex">
+        <div class="flex-shrink-0 p-3 fixed-sidebar" style="width: 280px;">
+            <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
+                <img src="/img/weave_logo.png" alt="Weave" width="30" height="24">
+                <span class="fs-5 fw-semibold">Weave API</span>
+            </a>
+            <ul class="list-unstyled ps-0">
+                <li class="mb-1">
+                    <a class="btn text-decoration-none" href="#introduction">Introduction</a>
+                </li>
+                <li class="mb-1">
+                    <a class="btn text-decoration-none" href="#account_setup">Account setup</a>
+                </li>
+                <li class="mb-1">
+                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+                        API Design
+                    </button>
+                    <div class="collapse show" id="home-collapse" style="">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li><a href="#domain" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Domain</a></li>
+                            <li><a href="#api_version" class="link-body-emphasis d-inline-flex text-decoration-none rounded">API version</a></li>
+                            <li><a href="#endpoints" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Endpoints</a></li>
+                            <li><a href="#headers" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Headers</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="mb-1">
+                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="true">
+                        Context
+                    </button>
+                    <div class="collapse show" id="dashboard-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li><a href="#integrations" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Integrations</a></li>
+                            <li><a href="#origin" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Origin</a></li>
+                            <li><a href="#api_version" class="link-body-emphasis d-inline-flex text-decoration-none rounded">API Version</a></li>
+                            <li><a href="#api_headers" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Headers</a></li>
+                            <li><a href="#returned_data" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Returned Data</a></li>
+                            <li><a href="#errors" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Errors</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="mb-1">
+                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="true">
+                        Endpoints
+                    </button>
+                    <div class="collapse show" id="orders-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li><a href="#authentication" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Authentication</a></li>
+                            <li><a href="#listings" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Listings</a></li>
+                            <li><a href="#calendar" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Calendar</a></li>
+                            <li><a href="#reservations" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Reservations</a></li>
+                            <li><a href="#users" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Users</a></li>
+                            <li><a href="#reviews" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Reviews</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="p-2 w-auto main-text">
+            <section class="mt-5" id="introduction">
+                <h3>Background</h3>
+                <p>Weave is an API aggregator for the travel tech industry. Weave enables applications to integrate with a number of different service providers using a single API. </p>
+                <p> When the underlying service provider APIs change, the integrations built using Weave will be updated with minimal to no development effort by application developers.</p>
+                <p>Weave will continue to support previous versions of its own API endpoints for a predetermined period of time to enable developers sufficient time to plan and execute updates to their product roadmaps</p>
+            </section>
 
-<div class="code">
+            <section class="mt-5" id="account_setup">
+              <h3>Account setup</h3>
+              <p>Account setup instructions go here</p>
+            </section>
+
+            <section class="mt-5" id="domain">
+                <h3>API Design</h3>
+                <p class="lead">Domain</p>
+                <p>Requests are made to the Weave API domain eg <code>https://use1.weaveapi.com</code></p>
+                <p>Requests can only be made using SSL enabled connections</p>
+            </section>
+
+            <section class="mt-5" id="api_version">
+                <p class="lead">API Versions</p>
+                <p>Requests will specify the Weave API version being used. If the version is omitted (or is invalid), Weave will default to the latest API version.</p>
+                <p>Deprecation schedule: Weave will support 2 previous versions for a period of 6 months before deprecation</p>
+            </section>
+
+            <section class="mt-5" id="endpoints">
+                <p class="lead">Endpoints</p>
+                <p>Each API will have an end point eg <code>/listings</code>. End points may require additional query parameters (for GET requests) or body parameters (for POST requests).</p>
+            </section>
+
+            <section class="mt-5" id="headers">
+                <p class="lead">Headers</p>
+                <p>Additional parameters for the request, for example authentication tokens and request destinations</p>
+                <p>Example</p>
+                <div class="code">
 <pre><code>
 curl -X GET \ 
       https://use1.weaveapi.com/v1/reservations/1234 \                 // Weave API endpoint
@@ -119,104 +126,102 @@ curl -X GET \
       -H 'X-WEAVE-PROXY-ACCESS-TOKEN: Hostaway access token’  \        // Proxied PMS access token 
       -H 'Cache-control: no-cache’ \                                   // Additional header commands    
 </code></pre>
-</div>
+                </div>
+            </section>
+            <section class="mt-5" id="integrations">
+                <h3>Context</h3>
+                <p class="lead">Integrations</p>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Type</th>
+                            <th scope="col">Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>PMS</td>
+                            <td>Guesty for Hosts</td>
+                        </tr>
+                        <tr>
+                            <td>PMS</td>
+                            <td>Hostaway</td>
+                        </tr>
+                        <tr>
+                            <td>PMS</td>
+                            <td>Hospitable</td>
+                        </tr>
+                        <tr>
+                            <td>PMS</td>
+                            <td>Hostfully</td>
+                        </tr>
+                        <tr>
+                            <td>PMS</td>
+                            <td>Lodgify</td>
+                        </tr>
+                        <tr>
+                            <td>PMS</td>
+                            <td>Lodgix</td>
+                        </tr>
+                        <tr>
+                            <td>PMS</td>
+                            <td>Smoobu</td>
+                        </tr>
+                        <tr>
+                            <td>PMS</td>
+                            <td>Uplisting</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
 
-          </section>
-          
-          <section class="mt-5" id="integrations">
-            <h3>Context</h3>
-		  <p class="lead">Integrations</p>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Type</th>
-                        <th scope="col">Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>PMS</td>
-                        <td>Guesty for Hosts</td>
-                    </tr>
-                    <tr>
-                        <td>PMS</td>
-                        <td>Hostaway</td>
-                    </tr>
-                    <tr>
-                        <td>PMS</td>
-                        <td>Hospitable</td>
-                    </tr>
-                    <tr>
-                        <td>PMS</td>
-                        <td>Hostfully</td>
-                    </tr>       
-                    <tr>
-                        <td>PMS</td>
-                        <td>Lodgify</td>
-                    </tr>
-                    <tr>
-                        <td>PMS</td>
-                        <td>Lodgix</td>
-                    </tr>                    
-                    <tr>
-                        <td>PMS</td>
-                        <td>Smoobu</td>
-                    </tr>
-                    <tr>
-                        <td>PMS</td>
-                        <td>Uplisting</td>
-                    </tr>
-                </tbody>
-            </table>
-          </section>
-          <section class="mt-5" id="origin">
-          <p class="lead">Origin</p>
-        <p>Origin for all requests will be: <code>https://use1.weaveapi.com</code>
-</p>
-          </section>
-          <section class="mt-5" id="api_version">
-            <p class="lead">API Version</p>
-              <p>Current API version is “v1”</p>
-              <p>Request paths should be prefixed with the API version ie  <code>“/api/v1/endpoint/path”</code></p>
-          </section>
-          <section class="mt-5" id="api_headers">
-            <p class="lead">Headers</p>
-              <p>The following headers need to be included with each request</p>
-              <p><span class="fw-semibold">X-WEAVE-APIKEY</span> 
-Unique API key assigned to each Weave customer
-</p>
-<p><span class="fw-semibold">X-WEAVE-PROXY-DESTINATION</span>
-PMS target for the request.  Current options are:
-</p>
-              <ul>
-                  <li>guesty_for_hosts</li>
-                  <li>hostaway</li>
-                  <li>hospitable</li>
-                  <li>hostfully</li>
-                  <li>lodgify</li>
-                  <li>lodgix</li>
-                  <li>smoobu</li>
-                  <li>uplisting</li>
-              </ul>
+            <section class="mt-5" id="origin">
+                <p class="lead">Origin</p>
+                <p>Origin for all requests will be: <code>https://use1.weaveapi.com</code>
+                </p>
+            </section>
 
-              <p><span class="fw-semibold">X-WEAVE-PROXY-PARTNER-KEY</span>
-API key issued to customer by the PMS / OTA target
-</p>
+            <section class="mt-5" id="api_version">
+                <p class="lead">API Version</p>
+                <p>Current API version is “v1”</p>
+                <p>Request paths should be prefixed with the API version ie <code>“/api/v1/endpoint/path”</code></p>
+            </section>
 
-              <p><span class="fw-semibold">X-WEAVE-CLIENT-ID</span>
-Id of the end user on the target PMS / OTA system
-</p>
+            <section class="mt-5" id="api_headers">
+                <p class="lead">Headers</p>
+                <p>The following headers need to be included with each request</p>
+                <p><span class="fw-semibold">X-WEAVE-APIKEY</span>
+                    Unique API key assigned to each Weave customer
+                </p>
+                <p><span class="fw-semibold">X-WEAVE-PROXY-DESTINATION</span>
+                    PMS target for the request. Current options are:
+                </p>
+                <ul>
+                    <li>guesty_for_hosts</li>
+                    <li>hostaway</li>
+                    <li>hospitable</li>
+                    <li>hostfully</li>
+                    <li>lodgify</li>
+                    <li>lodgix</li>
+                    <li>smoobu</li>
+                    <li>uplisting</li>
+                </ul>
+                <p><span class="fw-semibold">X-WEAVE-PROXY-PARTNER-KEY</span>
+                    API key issued to customer by the PMS / OTA target
+                </p>
+                <p><span class="fw-semibold">X-WEAVE-CLIENT-ID</span>
+                    Id of the end user on the target PMS / OTA system
+                </p>
+                <p><span class="fw-semibold">X-WEAVE-PROXY-ACCESS-TOKEN</span>
+                    (optional) Access token granted by target PMS / OTA system
+                </p>
+            </section>
 
-              <p><span class="fw-semibold">X-WEAVE-PROXY-ACCESS-TOKEN</span>
-(optional) Access token granted by target PMS / OTA system
-</p>
-          </section>
-
-          <section class="mt-5" id="returned_data">
-              <p class="lead">Returned data</p>
-<p>Data is always returned in the format</p>
-              <p>
-<div class="code">
+            <section class="mt-5" id="returned_data">
+                <p class="lead">Returned data</p>
+                <p>Data is always returned in the format</p>
+                <p>
+                    <div class="code">
 <pre><code>
 {
   data: [ array of normalized data ],
@@ -224,101 +229,92 @@ Id of the end user on the target PMS / OTA system
   status:  [ true / false indication of success of request ] 
 }
 </code></pre>
-</div>
-            
-</p>
-              <p>Note: If the proxy target does not support the endpoint, the response will be returned with the data and raw fields as empty arrays</p>
-          </section>
-          <section class="mt-5" id="errors">
-<p class="lead">Errors</p>
-              <p>Errors are returned with the appropriate error code and message</p>
-              <p>
-<div class="code">
+                    </div>
+                </p>
+                <p>Note: If the proxy target does not support the endpoint, the response will be returned with the data and raw fields as empty arrays</p>
+            </section>
+
+            <section class="mt-5" id="errors">
+                <p class="lead">Errors</p>
+                <p>Errors are returned with the appropriate error code and message</p>
+                <p>
+                    <div class="code">
 <pre><code>
 {
   status: false
-  proxy_message: “......”		// error message returned from target
+  proxy_message: “......”   // error message returned from target
 }
 </code></pre>
-</div>
-</p>
-          </section>
+                    </div>
+                </p>
+            </section>
 
-	      
-	      <section class="mt-5" id="authentication">
-          <h3>Endpoints</h3>
-<p class="lead">Authentication</p>
-		      <h6>Context</h6>
-		      <p>This endpoint is used to obtain authentication tokens from the target PMS.  The authentication token is then used in future requests (ie passed in the header as X-WEAVE-PROXY-ACCESS-TOKEN)</p>
-
-          <dl class="row">
-            <dt class="col-sm-3">Path</dt>
-            <dd class="col-sm-9"><p><code>/accessTokens</code></p></dd>
-
-            <dt  class="col-sm-3">Request type</dt>
-            <dd class="col-sm-9">POST</dd>
-
-            <dt class="col-sm-3">Headers</dt>
-            <dd class="col-sm-9">Content-type: application/json</dd>
-
-            <dt class="col-sm-3">Search parameters</dt>
-            <dd class="col-sm-9">None</dd>
-
-            <dt class="col-sm-3">Body</dt>
-            <dd class="col-sm-9">
-              <p><span class="fw-semibold">client_id:</span> PMS user client id</p>
-              <p><span class="fw-semibold">client_secret:</span> PMS user client secret</p>
-            </dd>
-
-            <dt class="col-sm-3">Results</dt>
-            <dd class="col-sm-9">
-              <div class="code">
+            <section class="mt-5" id="authentication">
+                <h3>Endpoints</h3>
+                <p class="lead">Authentication</p>
+                <h6>Context</h6>
+                <p>This endpoint is used to obtain authentication tokens from the target PMS. The authentication token is then used in future requests (ie passed in the header as X-WEAVE-PROXY-ACCESS-TOKEN)</p>
+                <dl class="row">
+                    <dt class="col-sm-3">Path</dt>
+                    <dd class="col-sm-9">
+                        <p><code>/accessTokens</code></p>
+                    </dd>
+                    <dt class="col-sm-3">Request type</dt>
+                    <dd class="col-sm-9">POST</dd>
+                    <dt class="col-sm-3">Headers</dt>
+                    <dd class="col-sm-9">Content-type: application/json</dd>
+                    <dt class="col-sm-3">Search parameters</dt>
+                    <dd class="col-sm-9">None</dd>
+                    <dt class="col-sm-3">Body</dt>
+                    <dd class="col-sm-9">
+                        <p><span class="fw-semibold">client_id:</span> PMS user client id</p>
+                        <p><span class="fw-semibold">client_secret:</span> PMS user client secret</p>
+                    </dd>
+                    <dt class="col-sm-3">Results</dt>
+                    <dd class="col-sm-9">
+                        <div class="code">
 <pre><code>
 {
   status: true/false,
   data: [
     {
-      access_token: ‘xs34…’	// access token to be used in future requests in the X-WEAVE-PROXY-ACCESS-TOKEN header field
-      expiry: 1749275583083	// expiry time of the access_token presented as the number of milliseconds since the beginning of the UNIX epoch
+      access_token: ‘xs34…’ // access token to be used in future requests in the X-WEAVE-PROXY-ACCESS-TOKEN header field
+      expiry: 1749275583083 // expiry time of the access_token presented as the number of milliseconds since the beginning of the UNIX epoch
     }
   ],
-  raw: …. 	
+  raw: ….   
 }
 </code></pre>
-              </div>
-            </dd>
+                        </div>
+                    </dd>
+                    <dt class="col-sm-3">Supported destinations</dt>
+                    <dd class="col-sm-9">
+                        <ul>
+                            <li>Hostaway</li>
+                            <li>Hospitable</li>
+                        </ul>
+                    </dd>
+                </dl>
+            </section>
 
-            <dt class="col-sm-3">Supported destinations</dt>
-            <dd class="col-sm-9" >
-              <ul>
-                <li>Hostaway</li>
-                <li>Hospitable</li>
-              </ul>
-            </dd>
-            
-          </dl>
-          
-	      </section>
-	      <section class="mt-5" id="listings">
-		<p class="lead">Listing</p>
-          <h6>Context</h6>
-		      <p>Request listings from PMS</p>
-		      <dl class="row">
-			      <dt class="col-sm-3">Path</dt>
-            <dd class="col-sm-9"><code>/listings</code></dd>
-
-            <dt class="col-sm-3">Request type</dt>
-            <dd class="col-sm-9">GET</dd>
-
-            <dt class="col-sm-3">Headers</dt>
-            <dd class="col-sm-9">Content-type: application/json</dd>
-
-            <dt class="col-sm-3">Search parameters</dt>
-            <dd class="col-sm-9"><p><span class="fw-semibold">listingId: </span>PMS id of the listing</p></dd>
-
-            <dt class="col-sm-3">Results</dt>
-            <dd class="col-sm-9">
-              <div class="code">
+            <section class="mt-5" id="listings">
+                <p class="lead">Listing</p>
+                <h6>Context</h6>
+                <p>Request listings from PMS</p>
+                <dl class="row">
+                    <dt class="col-sm-3">Path</dt>
+                    <dd class="col-sm-9"><code>/listings</code></dd>
+                    <dt class="col-sm-3">Request type</dt>
+                    <dd class="col-sm-9">GET</dd>
+                    <dt class="col-sm-3">Headers</dt>
+                    <dd class="col-sm-9">Content-type: application/json</dd>
+                    <dt class="col-sm-3">Search parameters</dt>
+                    <dd class="col-sm-9">
+                        <p><span class="fw-semibold">listingId: </span>PMS id of the listing</p>
+                    </dd>
+                    <dt class="col-sm-3">Results</dt>
+                    <dd class="col-sm-9">
+                        <div class="code">
 <pre><code>
 {
   status: true/false,
@@ -329,185 +325,172 @@ Id of the end user on the target PMS / OTA system
   ],
   raw: {
     // raw response from PMS
-  }	
+  } 
 }   
 </code></pre>
-              </div>
-            </dd>
+                        </div>
+                    </dd>
+                    <dt class="col-sm-3">Example</dt>
+                    <dd class="col-sm-9">
+                        <p><code>https://use1.weaveapi.com/api/v1/listings?listingId=1234</code></p>
+                    </dd>
+                    <dt class="col-sm-3">Supported destinations</dt>
+                    <dd class="col-sm-9">
+                        <ul>
+                            <li>Guesty for Hosts</li>
+                            <li>Hostaway</li>
+                            <li>Hospitable</li>
+                            <li>Lodgify</li>
+                            <li>Lodgix</li>
+                            <li>Smoobu</li>
+                            <li>Uplisting</li>
+                        </ul>
+                    </dd>
+                </dl>
+            </section>
 
-            <dt class="col-sm-3">Example</dt>
-            <dd class="col-sm-9"><p><code>https://use1.weaveapi.com/api/v1/listings?listingId=1234</code></p></dd>
+            <section class="mt-5" id="calendar">
+                <p class="lead">Calendar</p>
+                <h6>Context</h6>
+                <p>Request daily calendar from PMS</p>
+                <dl class="row">
+                    <dt class="col-sm-3">Path</dt>
+                    <dd class="col-sm-9">
+                        <p><code>/calendar</code></p>
+                    </dd>
+                    <dt class="col-sm-3">Request type</dt>
+                    <dd class="col-sm-9">GET</dd>
+                    <dt class="col-sm-3">Headers</dt>
+                    <dd class="col-sm-9">Content-type: application/json</dd>
+                    <dt class="col-sm-3">Search parameters</dt>
+                    <dd class="col-sm-9">
+                        <p><span class="fw-semibold">listingId:</span> (required) PMS id of the listing </p>
+                        <p><span class="fw-semibold">startDate:</span> return listings beginning from this date (yyyy-mm-dd)</p>
+                        <p><span class="fw-semibold">endDate:</span> return listings up to this date (yyyy-mm-dd)</p>
+                    </dd>
+                    <dt class="col-sm-3">Example</dt>
+                    <dd class="col-sm-9">
+                        <p><code>https://use1.weaveapi.com/api/v1/calendar?listingId=1234&startDate=2023-07-01&endDate=2023-07-31</code></p>
+                    </dd>
+                    <dt class="col-sm-3">Supported destinations</dt>
+                    <dd class="col-sm-9">
+                        <ul>
+                            <li>Guesty for Hosts</li>
+                            <li>Hostaway</li>
+                            <li>Hospitable</li>
+                            <li>Hostfully</li>
+                            <li>Lodgify</li>
+                            <li>Lodgix</li>
+                            <li>Uplisting</li>
+                        </ul>
+                    </dd>
+                </dl>
+            </section>
 
-            <dt class="col-sm-3">Supported destinations</dt>
-            <dd class="col-sm-9">
-              <ul>
-    			      <li>Guesty for Hosts</li>
-    			      <li>Hostaway</li>
-    			      <li>Hospitable</li>
-    			      <li>Lodgify</li>
-    			      <li>Lodgix</li>
-    			      <li>Smoobu</li>
-    			      <li>Uplisting</li>
-    		      </ul>
-            </dd>
-          </dl>
-	      </section>
-	      
-        <section class="mt-5" id="calendar">
-          <p class="lead">Calendar</p>
-          <h6>Context</h6>
-          <p>Request daily calendar from PMS</p>
+            <section class="mt-5" id="reservations">
+                <p class="lead">Reservations</p>
+                <h6>Context</h6>
+                <p>Request reservations from PMS</p>
+                <dl class="row">
+                    <dt class="col-sm-3">Path</dt>
+                    <dd class="col-sm-9">
+                        <p><code>/reservations</code></p>
+                    </dd>
+                    <dt class="col-sm-3">Request type</dt>
+                    <dd class="col-sm-9">GET</dd>
+                    <dt class="col-sm-3">Headers</dt>
+                    <dd class="col-sm-9">Content-type: application/json</dd>
+                    <dt class="col-sm-3">Search parameters</dt>
+                    <dd class="col-sm-9">
+                        <p><span class="fw-semibold">listingId:</span> PMS id of listing for which the reservations are being requested</p>
+                        <p><span class="fw-semibold">reservationId:</span> PMS id of reservation being requested (NOTE: not all PMS will respect the reservationId filter so you should expect the response to contain an array of reservations)</p>
+                        <p><span class="fw-semibold">startDate:</span> return listings beginning from this date (yyyy-mm-dd)</p>
+                        <p><span class="fw-semibold">endDate:</span> return listings up to this date (yyyy-mm-dd)</p>
+                    </dd>
+                    <dt class="col-sm-3">Example</dt>
+                    <dd class="col-sm-9">
+                        <p><code>https://use1.weaveapi.com/api/v1/reservations?reservationId=1234&listingId=9876&startDate=2023–07-01&endDate=2023-07-31</code></p>
+                    </dd>
+                    <dt class="col-sm-3">Supported destinations</dt>
+                    <dd class="col-sm-9">
+                        <ul>
+                            <li>Guesty for Hosts</li>
+                            <li>Hostaway</li>
+                            <li>Hospitable</li>
+                            <li>Hostfully</li>
+                            <li>Lodgify</li>
+                            <li>Lodgix</li>
+                            <li>Smoobu</li>
+                            <li>Uplisting</li>
+                        </ul>
+                    </dd>
+                </dl>
+            </section>
 
-          <dl class="row">
-            <dt class="col-sm-3">Path</dt>
-            <dd class="col-sm-9"><p><code>/calendar</code></p></dd>
+            <section class="mt-5" id="users">
+                <p class="lead">Users</p>
+                <h6>Context</h6>
+                <p>Request user details from PMS</p>
+                <dl class="row">
+                    <dt class="col-sm-3">Path</dt>
+                    <dd class="col-sm-9">
+                        <p><code>/users</code></p>
+                    </dd>
+                    <dt class="col-sm-3">Request type</dt>
+                    <dd class="col-sm-9">GET</dd>
+                    <dt class="col-sm-3">Headers</dt>
+                    <dd class="col-sm-9">Content-type: application/json</dd>
+                    <dt class="col-sm-3">Search parameters</dt>
+                    <dd class="col-sm-9">None</dd>
+                    <dt class="col-sm-3">Example</dt>
+                    <dd class="col-sm-9">
+                        <p><code>https://use1.weaveapi.com/api/v1/users</code></p>
+                    </dd>
+                    <dt class="col-sm-3">Supported destinations</dt>
+                    <dd class="col-sm-9">
+                        <ul>
+                            <li>Hostaway</li>
+                            <li>Hostfully</li>
+                            <li>Lodgix</li>
+                        </ul>
+                    </dd>
+                </dl>
+            </section>
 
-            <dt class="col-sm-3">Request type</dt>
-            <dd class="col-sm-9">GET</dd>
+            <section class="mt-5" id="reviews">
+                <p class="lead">Reviews</p>
+                <h6>Context</h6>
+                <p>Request reviews of listings from PMS</p>
+                <dl class="row">
+                    <dt class="col-sm-3">Path</dt>
+                    <dd class="col-sm-9">
+                        <p><code>/reviews</code></p>
+                    </dd>
+                    <dt class="col-sm-3">Request type</dt>
+                    <dd class="col-sm-9">GET</dd>
+                    <dt class="col-sm-3">Headers</dt>
+                    <dd class="col-sm-9">Content-type: application/json</dd>
+                    <dt class="col-sm-3">Search parameters</dt>
+                    <dd class="col-sm-9">
+                        <p><span class="fw-semibold">reviewId:</span> PMS id of review being queried</p>
+                    </dd>
+                    <dt class="col-sm-3">Example</dt>
+                    <dd class="col-sm-9">
+                        <p><code>https://use1.weaveapi.com/api/v1/reviews?reviewId=1234</code></p>
+                    </dd>
+                    <dt class="col-sm-3">Supported destinations</dt>
+                    <dd class="col-sm-9">
+                        <ul>
+                            <li>Hostaway</li>
+                            <li>Lodgix</li>
+                        </ul>
+                    </dd>
+                </dl>
+            </section>
 
-            <dt class="col-sm-3">Headers</dt>
-            <dd class="col-sm-9">Content-type: application/json</dd>
-
-            <dt class="col-sm-3">Search parameters</dt>
-            <dd class="col-sm-9">
-              <p><span class="fw-semibold">listingId:</span> (required) PMS id of the listing </p>
-              <p><span class="fw-semibold">startDate:</span>  return listings beginning from this date (yyyy-mm-dd)</p>
-              <p><span class="fw-semibold">endDate:</span>  return listings up to this date (yyyy-mm-dd)</p>
-            </dd>
-
-            <dt class="col-sm-3">Example</dt>
-            <dd class="col-sm-9"><p><code>https://use1.weaveapi.com/api/v1/calendar?listingId=1234&startDate=2023-07-01&endDate=2023-07-31</code></p></dd>
-
-            <dt class="col-sm-3">Supported destinations</dt>
-            <dd class="col-sm-9">
-              <ul>
-                <li>Guesty for Hosts</li>
-                <li>Hostaway</li>
-                <li>Hospitable</li>
-                <li>Hostfully</li>
-                <li>Lodgify</li>
-                <li>Lodgix</li>
-                <li>Uplisting</li>
-              </ul>
-            </dd>
-            
-          </dl>
-	      </section>
-
-	      <section class="mt-5" id="reservations">
-		      <p class="lead">Reservations</p>
-		      <h6>Context</h6>
-		      <p>Request reservations from PMS</p>
-
-          <dl class="row">
-            <dt class="col-sm-3">Path</dt>
-            <dd class="col-sm-9"><p><code>/reservations</code></p></dd>
-
-            <dt class="col-sm-3">Request type</dt>
-            <dd class="col-sm-9">GET</dd>
-
-            <dt class="col-sm-3">Headers</dt>
-            <dd class="col-sm-9">Content-type: application/json</dd>
-
-            <dt class="col-sm-3">Search parameters</dt>
-            <dd class="col-sm-9">
-              <p><span class="fw-semibold">listingId:</span> PMS id of listing for which the reservations are being requested</p>
-              <p><span class="fw-semibold">reservationId:</span>  PMS id of reservation being requested (NOTE: not all PMS will respect the reservationId filter so you should expect the response to contain an array of reservations)</p>
-              <p><span class="fw-semibold">startDate:</span>  return listings beginning from this date (yyyy-mm-dd)</p>
-              <p><span class="fw-semibold">endDate:</span>  return listings up to this date (yyyy-mm-dd)</p>
-            </dd>
-
-            <dt class="col-sm-3">Example</dt>
-            <dd class="col-sm-9"><p><code>https://use1.weaveapi.com/api/v1/reservations?reservationId=1234&listingId=9876&startDate=2023–07-01&endDate=2023-07-31</code></p></dd>
-
-            <dt class="col-sm-3">Supported destinations</dt>
-            <dd class="col-sm-9">
-              <ul>
-                <li>Guesty for Hosts</li>
-                <li>Hostaway</li>
-                <li>Hospitable</li>
-                <li>Hostfully</li>
-                <li>Lodgify</li>
-                <li>Lodgix</li>
-                <li>Smoobu</li>
-                <li>Uplisting</li>
-              </ul>
-            </dd>
-            
-          </dl>
-	      </section>
-
-        <section class="mt-5" id="users">
-          <p class="lead">Users</p>
-          <h6>Context</h6>
-          <p>Request user details from PMS</p>
-
-          <dl class="row">
-            <dt class="col-sm-3">Path</dt>
-            <dd class="col-sm-9"><p><code>/users</code></p></dd>
-
-            <dt class="col-sm-3">Request type</dt>
-            <dd class="col-sm-9">GET</dd>
-
-            <dt class="col-sm-3">Headers</dt>
-            <dd class="col-sm-9">Content-type: application/json</dd>
-
-            <dt class="col-sm-3">Search parameters</dt>
-            <dd class="col-sm-9">None</dd>
-
-            <dt class="col-sm-3">Example</dt>
-            <dd class="col-sm-9"><p><code>https://use1.weaveapi.com/api/v1/users</code></p></dd>
-
-            <dt class="col-sm-3">Supported destinations</dt>
-            <dd class="col-sm-9">
-              <ul>
-                <li>Hostaway</li>
-                <li>Hostfully</li>
-                <li>Lodgix</li>
-              </ul>
-            </dd>
-            
-          </dl>
-          
-        </section>
-
-        <section class="mt-5" id="reviews">
-          <p class="lead">Reviews</p>
-          <h6>Context</h6>
-          <p>Request reviews of listings from PMS</p>
-
-          <dl class="row">
-            <dt class="col-sm-3">Path</dt>
-            <dd class="col-sm-9"><p><code>/reviews</code></p></dd>
-
-            <dt class="col-sm-3">Request type</dt>
-            <dd class="col-sm-9">GET</dd>
-
-            <dt class="col-sm-3">Headers</dt>
-            <dd class="col-sm-9">Content-type: application/json</dd>
-
-            <dt class="col-sm-3">Search parameters</dt>
-            <dd class="col-sm-9">
-              <p><span class="fw-semibold">reviewId:</span> PMS id of review being queried</p>
-            </dd>
-
-            <dt class="col-sm-3">Example</dt>
-            <dd class="col-sm-9"><p><code>https://use1.weaveapi.com/api/v1/reviews?reviewId=1234</code></p></dd>
-
-            <dt class="col-sm-3">Supported destinations</dt>
-            <dd class="col-sm-9">
-              <ul>
-                <li>Hostaway</li>
-                <li>Lodgix</li>
-              </ul>
-            </dd>
-            
-          </dl>
-          
-        </section>
-	      
-      </div>
+        </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-  </body>
+    <script src="/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+</body>
+
 </html>
