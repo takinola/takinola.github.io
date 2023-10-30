@@ -90,6 +90,7 @@
         <div class="p-2 w-auto main-text">
             <section class="mt-5" id="introduction">
                 <h3>Background</h3>
+                <hr>
                 <p>Weave is an API aggregator for the travel tech industry. Weave enables applications to integrate with a number of different service providers using a single API. </p>
                 <p> When the underlying service provider APIs change, the integrations built using Weave will be updated with minimal to no development effort by application developers.</p>
                 <p>Weave will continue to support previous versions of its own API endpoints for a predetermined period of time to enable developers sufficient time to plan and execute updates to their product roadmaps</p>
@@ -97,6 +98,7 @@
 
             <section class="mt-5" id="account_setup">
               <h3>Get started</h3>
+              <hr>
               <p class="lead">Organization account</p>
               <p>In the user profile, create a new organization for your company.  You will be able to invite colleagues to join this organizational account.</p>
               <p>After the organization has been created, select it in the dropdown list and click on the "Visit organization dashboard link".</p>
@@ -104,14 +106,14 @@
                 <img src="/img/create_org.png" class="rounded mx-auto d-block" alt="Create organization form" style="width:100%">
               </div>
 
-              <p class="lead">API key</p>
+              <p class="lead mt-5">API key</p>
               <p>In the organizational dashboard, create the Weave API key for the organization.  This key must be included in the header for each request</p>
               <p>A new key can be generated at any time but do note that only one key can be in operation at any time.  Regenerating a new key will immediately invalidate any other existing key</p>
               <div class="offset-sm-2 col-sm-8">
                 <img src="/img/generate_keys.png" class="rounded mx-auto d-block" alt="Generate API keys" style="width:100%">
               </div>
 
-              <p class="lead">Integrations</p>
+              <p class="lead mt-5">Integrations</p>
               <p>Select the integrations required for your connections</p>
               <div class="offset-sm-2 col-sm-8">
                 <img src="/img/manage_integrations.png" class="rounded mx-auto d-block" alt="Activate required integrations" style="width:100%">
@@ -121,6 +123,7 @@
 
             <section class="mt-5" id="domain">
                 <h3>API Design</h3>
+                <hr>
                 <p class="lead">Domain</p>
                 <p>Requests are made to the Weave API domain eg <code>https://use1.weaveapi.com</code></p>
                 <p>Requests can only be made using SSL enabled connections</p>
@@ -275,6 +278,7 @@ curl -X GET \
 
             <section class="mt-5" id="authentication">
                 <h3>Endpoints</h3>
+                <hr>
                 <p class="lead">Authentication</p>
                 <h6>Context</h6>
                 <p>This endpoint is used to obtain authentication tokens from the target PMS. The authentication token is then used in future requests (ie passed in the header as X-WEAVE-PROXY-ACCESS-TOKEN)</p>
