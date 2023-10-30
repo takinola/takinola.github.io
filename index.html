@@ -34,9 +34,7 @@
                 <li class="mb-1">
                     <a class="btn text-decoration-none" href="#introduction">Introduction</a>
                 </li>
-                <li class="mb-1">
-                    <a class="btn text-decoration-none" href="#account_setup">Account setup</a>
-                </li>
+
                 <li class="mb-1">
                     <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
                         API Design
@@ -50,6 +48,7 @@
                         </ul>
                     </div>
                 </li>
+
                 <li class="mb-1">
                     <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="true">
                         Context
@@ -65,6 +64,7 @@
                         </ul>
                     </div>
                 </li>
+
                 <li class="mb-1">
                     <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="true">
                         Endpoints
@@ -80,6 +80,7 @@
                         </ul>
                     </div>
                 </li>
+                
             </ul>
         </div>
         <div class="p-2 w-auto main-text">
@@ -94,7 +95,16 @@
               <h3>Get started</h3>
               <p class="lead">Organization account</p>
               <p>In the user profile, create a new organization for your company.  You will be able to invite colleagues to join this organizational account.</p>
-              <img src="/img/create_org.png" class="rounded mx-auto d-block" alt="Create organization form">
+              <div class="col-sm-6">
+                <img src="/img/create_org.png" class="rounded mx-auto d-block" alt="Create organization form">
+              </div>
+
+              <p>In the organizational dashboard, create the Weave API key for the organization.  This key must be included in the header for each request</p>
+              <p>A new key can be generated at any time but do note that only one key can be in operation at any time.  Regenerating a new key will immediately invalidate any other existing key</p>
+              <div class="col-sm-6">
+                <img src="/img/generate_keys.png" class="rounded mx-auto d-block" alt="Generate API keys">
+              </div>
+              
             </section>
 
             <section class="mt-5" id="domain">
