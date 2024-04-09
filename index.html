@@ -85,6 +85,21 @@
                     </div>
                 </li>
 
+                <li class="mb-1">
+                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#objects-collape" aria-expanded="true">
+                        Objects
+                    </button>
+                    <div class="collapse show" id="objects-collape">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li><a href="#listing_object" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Listing</a></li>
+                            <li><a href="#calendar_object" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Calendar</a></li>
+                            <li><a href="#reservation_object" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Reservation</a></li>
+                            <li><a href="#user_object" class="link-body-emphasis d-inline-flex text-decoration-none rounded">User</a></li>
+                            <li><a href="#review_object" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Review</a></li>
+                        </ul>
+                    </div>
+                </li>
+
             </ul>
         </div>
         <div class="p-2 w-auto main-text">
@@ -147,7 +162,7 @@
                 <div class="code">
 <pre><code>
 curl -X GET \ 
-      https://use1.weaveapi.com/v1/reservations/1234 \                 // Weave API endpoint
+      https://use1.weaveapi.com/api/v1/reservations/1234 \                 // Weave API endpoint
       -H 'X-WEAVE-APIKEY: myweaveapikey’  \                            // Weave API access token
       -H 'X-WEAVE-PROXY-DESTINATION: hostaway’ \                       // Proxied PMS
       -H 'X-WEAVE-PROXY-ACCESS-TOKEN: Hostaway access token’  \        // Proxied PMS access token 
@@ -205,8 +220,7 @@ curl -X GET \
 
             <section class="mt-5" id="origin">
                 <p class="lead">Origin</p>
-                <p>Origin for all requests will be: <code>https://use1.weaveapi.com</code>
-                </p>
+                <p>Origin for all requests will be: <code>https://use1.weaveapi.com</code></p>
             </section>
 
             <section class="mt-5" id="api_version">
@@ -243,6 +257,12 @@ curl -X GET \
                 <p><span class="fw-semibold">X-WEAVE-PROXY-ACCESS-TOKEN</span>
                     (optional) Access token granted by target PMS / OTA system
                 </p>
+            </section>
+
+            <section class="mt-5" id="proxy_origin">
+                <p class="lead">Overiding proxy origin</p>
+                <p>The URL origin for each proxy destination is hard-coded into Weave.  To override the hard-coded origin, provide the origin search parameter eg</p>
+                <p><div class="code">https://use1.weaveapi.com/api/vi/listings?origin="https%3A%2F%2Fexample.com"</div></p>
             </section>
 
             <section class="mt-5" id="returned_data">
@@ -397,6 +417,24 @@ curl -X GET \
                         <p><span class="fw-semibold">startDate:</span> return listings beginning from this date (yyyy-mm-dd)</p>
                         <p><span class="fw-semibold">endDate:</span> return listings up to this date (yyyy-mm-dd)</p>
                     </dd>
+                    <dt class="col-sm-3">Results</dt>
+                    <dd class="col-sm-9">
+                        <div class="code">
+<pre><code>
+{
+  status: true/false,
+  data: [
+    {
+      // array of calendar objects
+    }
+  ],
+  raw: {
+    // raw response from PMS
+  } 
+}   
+</code></pre>
+                        </div>
+                    </dd>
                     <dt class="col-sm-3">Example</dt>
                     <dd class="col-sm-9">
                         <p><code>https://use1.weaveapi.com/api/v1/calendar?listingId=1234&startDate=2023-07-01&endDate=2023-07-31</code></p>
@@ -418,6 +456,7 @@ curl -X GET \
 
             <section class="mt-5" id="reservations">
                 <p class="lead">Reservations</p>
+                
                 <h6>Context</h6>
                 <p>Request reservations from PMS</p>
                 <dl class="row">
@@ -435,6 +474,24 @@ curl -X GET \
                         <p><span class="fw-semibold">reservationId:</span> PMS id of reservation being requested (NOTE: not all PMS will respect the reservationId filter so you should expect the response to contain an array of reservations)</p>
                         <p><span class="fw-semibold">startDate:</span> return listings beginning from this date (yyyy-mm-dd)</p>
                         <p><span class="fw-semibold">endDate:</span> return listings up to this date (yyyy-mm-dd)</p>
+                    </dd>
+                    <dt class="col-sm-3">Results</dt>
+                    <dd class="col-sm-9">
+                        <div class="code">
+<pre><code>
+{
+  status: true/false,
+  data: [
+    {
+      // reservation object
+    }
+  ],
+  raw: {
+    // raw response from PMS
+  } 
+}   
+</code></pre>
+                        </div>
                     </dd>
                     <dt class="col-sm-3">Example</dt>
                     <dd class="col-sm-9">
@@ -454,6 +511,214 @@ curl -X GET \
                         </ul>
                     </dd>
                 </dl>
+
+
+                <h6 class="mt-5">Context</h6>
+                <p>Create reservations in PMS</p>
+                <dl class="row">
+                    <dt class="col-sm-3">Path</dt>
+                    <dd class="col-sm-9">
+                        <p><code>/reservations</code></p>
+                    </dd>
+                    <dt class="col-sm-3">Request type</dt>
+                    <dd class="col-sm-9">POST</dd>
+                    <dt class="col-sm-3">Headers</dt>
+                    <dd class="col-sm-9">Content-type: application/json</dd>
+                    <dt class="col-sm-3">Search parameters</dt>
+                    <dd class="col-sm-9">
+                        <p>N/A</p>
+                    </dd>
+                    <dt class="col-sm-3">Body</dt>
+                    <dd class="col-sm-9">
+                        <p><span class="fw-semibold">ListingId: </span>(required) PMS id of listing in which the reservation will be created</p>
+                        <p><span class="fw-semibold">channelName: </span>(required) Name of channel creating the reservation (eg airbnb)</p>
+                        <p><span class="fw-semibold">arrivalDate: </span>(required) Starting date of reservation</p>
+                        <p><span class="fw-semibold">departureDate: </span>(required) End date of reservation</p>
+                        <p><span class="fw-semibold">guestName: </span>(required) Full name of guest</p>
+                        <p><span class="fw-semibold">guestAddress: </span>Guest's street address</p>
+                        <p><span class="fw-semibold">guestCity: </span>Guest's city</p>
+                        <p><span class="fw-semibold">guestCountry: </span>Guest's country</p>
+                        <p><span class="fw-semibold">guestZipCode: </span>Guest's zip code</p>
+                        <p><span class="fw-semibold">guestEmail: </span>Guest's email address</p>
+                        <p><span class="fw-semibold">guestPhone: </span>Guest's phone number</p>
+                        <p><span class="fw-semibold">numberOfGuests: </span>Total number of guests</p>
+                        <p><span class="fw-semibold">numberOfAdults: </span>Total number of adults</p>
+                        <p><span class="fw-semibold">numberOfChildren: </span>Total number of children</p>
+                        <p><span class="fw-semibold">numberOfInfants: </span>Total number of infants</p>
+                        <p><span class="fw-semibold">numberOfPets: </span>Total number of pets</p>
+                        <p><span class="fw-semibold">totalPrice: </span>Total price charged for reservation</p>
+                        <p><span class="fw-semibold">taxAmount: </span>Tax charged on payment</p>
+                        <p><span class="fw-semibold">currency: </span>Currency</p>
+                        <p><span class="fw-semibold">isPaid: </span>Payment status of reservation</p>
+                        <p><span class="fw-semibold">paymentMethod: </span>Payment method</p>
+                        <p><span class="fw-semibold">status: </span>Reservation status</p>
+                        <p><span class="fw-semibold">comment: </span>Comment</p>
+                    </dd>
+                    <dt class="col-sm-3">Results</dt>
+                    <dd class="col-sm-9">
+                        <div class="code">
+<pre><code>
+{
+  status: true/false,
+  data: [
+    {
+      // reservation object
+    }
+  ],
+  raw: {
+    // raw response from PMS
+  } 
+}   
+</code></pre>
+                        </div>
+                    </dd>
+                    <dt class="col-sm-3">Example</dt>
+                    <dd class="col-sm-9">
+<pre><code>
+POST
+https://use1.weaveapi.com/api/v1/reservations
+
+BODY
+{
+    listingId: 9876,
+    arrivalDate: 2023–07-01,
+    departureDate: 2023-07-31,
+    guestName: Jane Doe
+}
+</code></pre>
+                    </dd>
+                    <dt class="col-sm-3">Supported destinations</dt>
+                    <dd class="col-sm-9">
+                        <ul>
+                            <li>Hostaway</li>
+                        </ul>
+                    </dd>
+                </dl>
+
+
+
+                <h6 class="mt-5">Context</h6>
+                <p>Modify reservations in PMS</p>
+                <dl class="row">
+                    <dt class="col-sm-3">Path</dt>
+                    <dd class="col-sm-9">
+                        <p><code>/reservations</code></p>
+                    </dd>
+                    <dt class="col-sm-3">Request type</dt>
+                    <dd class="col-sm-9">PATCH</dd>
+                    <dt class="col-sm-3">Headers</dt>
+                    <dd class="col-sm-9">Content-type: application/json</dd>
+                    <dt class="col-sm-3">Search parameters</dt>
+                    <dd class="col-sm-9">
+                        <p><span class="fw-semibold">reservationId: </span>(required) PMS id of reservation being modified</p>
+                    </dd>
+                    <dt class="col-sm-3">Body</dt>
+                    <dd class="col-sm-9">
+                        <p><span class="fw-semibold">ListingId: </span>PMS id of listing in which the reservation exists</p>
+                        <p><span class="fw-semibold">channelName: </span>Name of channel modifying the reservation (eg airbnb)</p>
+                        <p><span class="fw-semibold">arrivalDate: </span>Starting date of reservation</p>
+                        <p><span class="fw-semibold">departureDate: </span>End date of reservation</p>
+                        <p><span class="fw-semibold">guestName: </span>Full name of guest</p>
+                        <p><span class="fw-semibold">guestAddress: </span>Guest's street address</p>
+                        <p><span class="fw-semibold">guestCity: </span>Guest's city</p>
+                        <p><span class="fw-semibold">guestCountry: </span>Guest's country</p>
+                        <p><span class="fw-semibold">guestZipCode: </span>Guest's zip code</p>
+                        <p><span class="fw-semibold">guestEmail: </span>Guest's email address</p>
+                        <p><span class="fw-semibold">guestPhone: </span>Guest's phone number</p>
+                        <p><span class="fw-semibold">numberOfGuests: </span>Total number of guests</p>
+                        <p><span class="fw-semibold">numberOfAdults: </span>Total number of adults</p>
+                        <p><span class="fw-semibold">numberOfChildren: </span>Total number of children</p>
+                        <p><span class="fw-semibold">numberOfInfants: </span>Total number of infants</p>
+                        <p><span class="fw-semibold">numberOfPets: </span>Total number of pets</p>
+                        <p><span class="fw-semibold">totalPrice: </span>Total price charged for reservation</p>
+                        <p><span class="fw-semibold">taxAmount: </span>Tax charged on payment</p>
+                        <p><span class="fw-semibold">currency: </span>Currency</p>
+                        <p><span class="fw-semibold">isPaid: </span>Payment status of reservation</p>
+                        <p><span class="fw-semibold">paymentMethod: </span>Payment method</p>
+                        <p><span class="fw-semibold">status: </span>Reservation status</p>
+                        <p><span class="fw-semibold">comment: </span>Comment</p>
+                    </dd>
+                    <dt class="col-sm-3">Results</dt>
+                    <dd class="col-sm-9">
+                        <div class="code">
+<pre><code>
+{
+  status: true/false,
+  data: [
+    {
+      // reservation object
+    }
+  ],
+  raw: {
+    // raw response from PMS
+  } 
+}   
+</code></pre>
+                        </div>
+                    </dd>
+                    <dt class="col-sm-3">Example</dt>
+                    <dd class="col-sm-9">
+<pre><code>
+PATCH
+https://use1.weaveapi.com/api/v1/reservations?reservationId=1234
+
+BODY
+{
+    listingId: 9876,
+    arrivalDate: 2023–07-01,
+    departureDate: 2023-07-31,
+    guestName: Jane Doe
+}
+</code></pre>
+                    </dd>
+                    <dt class="col-sm-3">Supported destinations</dt>
+                    <dd class="col-sm-9">
+                        <ul>
+                            <li>Hostaway</li>
+                        </ul>
+                    </dd>
+                </dl>
+
+
+                <h6 class="mt-5">Context</h6>
+                <p>Cancel reservations in PMS</p>
+                <dl class="row">
+                    <dt class="col-sm-3">Path</dt>
+                    <dd class="col-sm-9">
+                        <p><code>/reservations</code></p>
+                    </dd>
+                    <dt class="col-sm-3">Request type</dt>
+                    <dd class="col-sm-9">PUT</dd>
+                    <dt class="col-sm-3">Headers</dt>
+                    <dd class="col-sm-9">Content-type: application/json</dd>
+                    <dt class="col-sm-3">Search parameters</dt>
+                    <dd class="col-sm-9">
+                        <p><span class="fw-semibold">reservationId: </span>(required) PMS id of reservation being modified</p>
+                    </dd>
+                    <dt class="col-sm-3">Body</dt>
+                    <dd class="col-sm-9">
+                        <p><span class="fw-semibold">cancelledBy: </span>(required) Initiator of cancellation (eg host or guest)</p>
+                    </dd>
+                    <dt class="col-sm-3">Example</dt>
+                    <dd class="col-sm-9">
+<pre><code>
+PUT
+https://use1.weaveapi.com/api/v1/reservations?reservationId=1234
+
+BODY
+{
+    cancelledBy: guest
+}
+</code></pre>
+                    </dd>
+                    <dt class="col-sm-3">Supported destinations</dt>
+                    <dd class="col-sm-9">
+                        <ul>
+                            <li>Hostaway</li>
+                        </ul>
+                    </dd>
+                </dl>
+
             </section>
 
             <section class="mt-5" id="users">
@@ -471,6 +736,24 @@ curl -X GET \
                     <dd class="col-sm-9">Content-type: application/json</dd>
                     <dt class="col-sm-3">Search parameters</dt>
                     <dd class="col-sm-9">None</dd>
+                    <dt class="col-sm-3">Results</dt>
+                    <dd class="col-sm-9">
+                        <div class="code">
+<pre><code>
+{
+  status: true/false,
+  data: [
+    {
+      // user object
+    }
+  ],
+  raw: {
+    // raw response from PMS
+  } 
+}   
+</code></pre>
+                        </div>
+                    </dd>
                     <dt class="col-sm-3">Example</dt>
                     <dd class="col-sm-9">
                         <p><code>https://use1.weaveapi.com/api/v1/users</code></p>
@@ -503,6 +786,24 @@ curl -X GET \
                     <dd class="col-sm-9">
                         <p><span class="fw-semibold">reviewId:</span> PMS id of review being queried</p>
                     </dd>
+                    <dt class="col-sm-3">Results</dt>
+                    <dd class="col-sm-9">
+                        <div class="code">
+<pre><code>
+{
+  status: true/false,
+  data: [
+    {
+      // reviews object
+    }
+  ],
+  raw: {
+    // raw response from PMS
+  } 
+}   
+</code></pre>
+                        </div>
+                    </dd>
                     <dt class="col-sm-3">Example</dt>
                     <dd class="col-sm-9">
                         <p><code>https://use1.weaveapi.com/api/v1/reviews?reviewId=1234</code></p>
@@ -516,6 +817,445 @@ curl -X GET \
                     </dd>
                 </dl>
             </section>
+
+
+            <section class="mt-5" id="listing_object">
+                <h3>Objects</h3>
+                <hr>
+                <p class="lead">Listing</p>
+                <h6>Fields</h6>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">Field</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>id</td>
+                            <td>string</td>
+                            <td>listing id</td>
+                        </tr>
+                        <tr>
+                            <td>name</td>
+                            <td>string</td>
+                            <td>listing name</td>
+                        </tr>
+                        <tr>
+                            <td>description</td>
+                            <td>string</td>
+                            <td>description of listing</td>
+                        </tr>
+                        <tr>
+                            <td>thumbnailUrl</td>
+                            <td>string</td>
+                            <td>url of listing thumbnail</td>
+                        </tr>
+                        <tr>
+                            <td>state</td>
+                            <td>string</td>
+                            <td>state where listing is located</td>
+                        </tr>
+                        <tr>
+                            <td>city</td>
+                            <td>string</td>
+                            <td>city where listing is located</td>
+                        </tr>
+                        <tr>
+                            <td>address</td>
+                            <td>string</td>
+                            <td>full address of listing</td>
+                        </tr>
+                        <tr>
+                            <td>zipcode</td>
+                            <td>string</td>
+                            <td>zipcode where listing is located</td>
+                        </tr>
+                        <tr>
+                            <td>country</td>
+                            <td>string</td>
+                            <td>country where listing is located</td>
+                        </tr>
+                        <tr>
+                            <td>countryCode</td>
+                            <td>string</td>
+                            <td>country code of listing address</td>
+                        </tr>
+                        <tr>
+                            <td>latitude</td>
+                            <td>string</td>
+                            <td>latitude of listing</td>
+                        </tr>
+                        <tr>
+                            <td>longitude</td>
+                            <td>string</td>
+                            <td>longitude of listing</td>
+                        </tr>
+                        <tr>
+                            <td>price</td>
+                            <td>string</td>
+                            <td>nightly price of stay</td>
+                        </tr>
+                        <tr>
+                            <td>currency</td>
+                            <td>string</td>
+                            <td>currency of pricing</td>
+                        </tr>
+                        <tr>
+                            <td>currencyCode</td>
+                            <td>string</td>
+                            <td>currencyCode of pricing</td>
+                        </tr>
+                        <tr>
+                            <td>personCapacity</td>
+                            <td>integer</td>
+                            <td>Maximum number of people that can be accommodated</td>
+                        </tr>
+                        <tr>
+                            <td>bedroomsNumber</td>
+                            <td>integer</td>
+                            <td>Number of bedrooms</td>
+                        </tr>
+                        <tr>
+                            <td>bedsNumber</td>
+                            <td>string</td>
+                            <td>Number of beds</td>
+                        </tr>
+                        <tr>
+                            <td>bathroomsNumber</td>
+                            <td>string</td>
+                            <td>Number of bathrooms</td>
+                        </tr>
+                        <tr>
+                            <td>amenities</td>
+                            <td>array</td>
+                            <td>amenities available</td>
+                        </tr>
+                        <tr>
+                            <td>website</td>
+                            <td>string</td>
+                            <td>URL for listing</td>
+                        </tr>
+                        <tr>
+                            <td>images</td>
+                            <td>string</td>
+                            <td>url for images</td>
+                        </tr>
+                        <tr>
+                            <td>propertyRooms</td>
+                            <td>array</td>
+                            <td>rooms available in listing</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+
+            <section class="mt-5" id="calendar_object">
+                <p class="lead">Calendar</p>
+                <h6>Fields</h6>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">Field</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>id</td>
+                            <td>string</td>
+                            <td>calendar id</td>
+                        </tr>
+                        <tr>
+                            <td>listingId</td>
+                            <td>string</td>
+                            <td>listing id</td>
+                        </tr>
+                        <tr>
+                            <td>date</td>
+                            <td>string</td>
+                            <td>calendar date</td>
+                        </tr>
+                        <tr>
+                            <td>isAvailable</td>
+                            <td>boolean</td>
+                            <td>true / false if listing is available on the date</td>
+                        </tr>
+                        <tr>
+                            <td>price</td>
+                            <td>string</td>
+                            <td>nightly stay price</td>
+                        </tr>
+                        <tr>
+                            <td>currency</td>
+                            <td>string</td>
+                            <td>currency of pricing</td>
+                        </tr>
+                        <tr>
+                            <td>minimumStay</td>
+                            <td>integer</td>
+                            <td>minimum number of nights stay that can be booked</td>
+                        </tr>
+                        <tr>
+                            <td>maximumStay</td>
+                            <td>integer</td>
+                            <td>maximum number of nights stay that can be booked</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="mt-5" id="reservation_object">
+                <p class="lead">Reservation</p>
+                <h6>Fields</h6>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">Field</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>id</td>
+                            <td>string</td>
+                            <td>reservation id</td>
+                        </tr>
+                        <tr>
+                            <td>reservationId</td>
+                            <td>string</td>
+                            <td>Id of reservation</td>
+                        </tr>
+                        <tr>
+                            <td>channelName</td>
+                            <td>string</td>
+                            <td>booking channel</td>
+                        </tr>
+                        <tr>
+                            <td>reservationDate</td>
+                            <td>string</td>
+                            <td>Date reservation was booked</td>
+                        </tr>
+                        <tr>
+                            <td>guestName</td>
+                            <td>string</td>
+                            <td>full name of guest</td>
+                        </tr>
+                        <tr>
+                            <td>guestFirstName</td>
+                            <td>string</td>
+                            <td>first name of guest</td>
+                        </tr>
+                        <tr>
+                            <td>guestLastName</td>
+                            <td>string</td>
+                            <td>last name of guest</td>
+                        </tr>
+                        <tr>
+                            <td>guestCountry</td>
+                            <td>string</td>
+                            <td>country of guest address</td>
+                        </tr>
+                        <tr>
+                            <td>guestZipCode</td>
+                            <td>string</td>
+                            <td>zipcode of guest address</td>
+                        </tr>
+                        <tr>
+                            <td>guestCity</td>
+                            <td>string</td>
+                            <td>city of guest address</td>
+                        </tr>
+                        <tr>
+                            <td>guestAddress</td>
+                            <td>string</td>
+                            <td>full address of guest</td>
+                        </tr>
+                        <tr>
+                            <td>guestEmail</td>
+                            <td>string</td>
+                            <td>guest email address</td>
+                        </tr>
+                        <tr>
+                            <td>phone</td>
+                            <td>string</td>
+                            <td>guest phone number</td>
+                        </tr>
+                        <tr>
+                            <td>numberOfGuests</td>
+                            <td>integer</td>
+                            <td>number of guests in booking</td>
+                        </tr>
+                        <tr>
+                            <td>arrivalDate</td>
+                            <td>string</td>
+                            <td>starting date of reservation</td>
+                        </tr>
+                        <tr>
+                            <td>departureDate</td>
+                            <td>string</td>
+                            <td>ending date of reservation</td>
+                        </tr>
+                        <tr>
+                            <td>nights</td>
+                            <td>integer</td>
+                            <td>number of nights in reservation</td>
+                        </tr>
+                        <tr>
+                            <td>totalPrice</td>
+                            <td>string</td>
+                            <td>total price paid for booking</td>
+                        </tr>
+                        <tr>
+                            <td>currency</td>
+                            <td>string</td>
+                            <td>currency of payment</td>
+                        </tr>
+                        <tr>
+                            <td>isPaid</td>
+                            <td>boolean</td>
+                            <td>true/false whether reservation has been charged</td>
+                        </tr>
+                        <tr>
+                            <td>status</td>
+                            <td>string</td>
+                            <td>status of reservation</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </section>
+
+
+            <section class="mt-5" id="user_object">
+                <p class="lead">User</p>
+                <h6>Fields</h6>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">Field</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>id</td>
+                            <td>string</td>
+                            <td>user id</td>
+                        </tr>
+                        <tr>
+                            <td>email</td>
+                            <td>string</td>
+                            <td>email address of user</td>
+                        </tr>
+                        <tr>
+                            <td>secondEmail</td>
+                            <td>string</td>
+                            <td>second email address of user</td>
+                        </tr>
+                        <tr>
+                            <td>firstName</td>
+                            <td>string</td>
+                            <td>first name of user</td>
+                        </tr>
+                        <tr>
+                            <td>lastName</td>
+                            <td>string</td>
+                            <td>last name of user</td>
+                        </tr>
+                        <tr>
+                            <td>title</td>
+                            <td>string</td>
+                            <td>title of user</td>
+                        </tr>
+                        <tr>
+                            <td>city</td>
+                            <td>string</td>
+                            <td>city of user address</td>
+                        </tr>
+                        <tr>
+                            <td>country</td>
+                            <td>string</td>
+                            <td>country of user address</td>
+                        </tr>
+                        <tr>
+                            <td>postalCode</td>
+                            <td>string</td>
+                            <td>postal code of user address</td>
+                        </tr>
+                        <tr>
+                            <td>phone</td>
+                            <td>string</td>
+                            <td>user phone number</td>
+                        </tr>
+                        <tr>
+                            <td>isAdmin</td>
+                            <td>Boolean</td>
+                            <td>true / false if user is an admin</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="mt-5" id="review_object">
+                <p class="lead">Review</p>
+                <h6>Fields</h6>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">Field</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>id</td>
+                            <td>string</td>
+                            <td>user id</td>
+                        </tr>
+                        <tr>
+                            <td>accountId</td>
+                            <td>string</td>
+                            <td>id of account</td>
+                        </tr>
+                        <tr>
+                            <td>reservationId</td>
+                            <td>string</td>
+                            <td>id of reservation that was reviewed</td>
+                        </tr>
+                        <tr>
+                            <td>rating</td>
+                            <td>string</td>
+                            <td>review rating</td>
+                        </tr>
+                        <tr>
+                            <td>guestName</td>
+                            <td>string</td>
+                            <td>full name of guest leaving review</td>
+                        </tr>
+                        <tr>
+                            <td>title</td>
+                            <td>string</td>
+                            <td>title of review</td>
+                        </tr>
+                        <tr>
+                            <td>description</td>
+                            <td>string</td>
+                            <td>review text</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </section>
+
 
         </div>
     </div>
