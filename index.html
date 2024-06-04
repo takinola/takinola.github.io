@@ -64,6 +64,7 @@
                             <li><a href="#api_version" class="link-body-emphasis d-inline-flex text-decoration-none rounded">API version</a></li>
                             <li><a href="#api_headers" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Headers</a></li>
                             <li><a href="#returned_data" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Returned data</a></li>
+                            <li><a href="#webhooks" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Webhooks</a></li>
                             <li><a href="#errors" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Errors</a></li>
                         </ul>
                     </div>
@@ -162,11 +163,11 @@
                 <div class="code">
 <pre><code>
 curl -X GET \ 
-      https://use1.weaveapi.com/api/v1/reservations/1234 \                 // Weave API endpoint
-      -H 'X-WEAVE-APIKEY: myweaveapikey’  \                            // Weave API access token
-      -H 'X-WEAVE-PROXY-DESTINATION: hostaway’ \                       // Proxied PMS
-      -H 'X-WEAVE-PROXY-ACCESS-TOKEN: Hostaway access token’  \        // Proxied PMS access token 
-      -H 'Cache-control: no-cache’ \                                   // Additional header commands    
+      https://use1.weaveapi.com/api/v1/reservations/1234 \             // Weave API endpoint
+      -H 'X-WEAVE-APIKEY: myweaveapikey' \                             // Weave API access token
+      -H 'X-WEAVE-PROXY-DESTINATION: hostaway' \                       // Proxied PMS/OTA
+      -H 'X-WEAVE-PROXY-ACCESS-TOKEN: Hostaway access token' \         // Proxied PMS/OTA access token
+      -H 'Cache-control: no-cache' \                                   // Additional header commands    
 </code></pre>
                 </div>
             </section>
@@ -182,6 +183,10 @@ curl -X GET \
                         </tr>
                     </thead>
                     <tbody>
+                        <tr>
+                            <td>OTA</td>
+                            <td>Connect Airbnb</td>
+                        </tr>
                         <tr>
                             <td>PMS</td>
                             <td>Guesty for Hosts</td>
@@ -236,9 +241,10 @@ curl -X GET \
                     Unique API key assigned to each Weave customer
                 </p>
                 <p><span class="fw-semibold">X-WEAVE-PROXY-DESTINATION</span>
-                    PMS target for the request. Current options are:
+                    PMS / OTA target for the request. Current options are:
                 </p>
                 <ul>
+                    <li>connect_airbnb</li>
                     <li>guesty_for_hosts</li>
                     <li>hostaway</li>
                     <li>hospitable</li>
@@ -273,13 +279,51 @@ curl -X GET \
 <pre><code>
 {
   data: [ array of normalized data ],
-  raw:  [ raw data as returned by the proxy ]
+  raw:  [ raw data as returned by the proxy ],
   status:  [ true / false indication of success of request ] 
 }
 </code></pre>
                     </div>
                 </p>
                 <p>Note: If the proxy target does not support the endpoint, the response will be returned with the data and raw fields as empty arrays</p>
+            </section>
+
+            <section class="mt-5" id="webhooks">
+                <p class="lead">Webhooks</p>
+                <p>Weave is registered to receive all webhooks from every integrated PMS / OTA partner. In order to start receiving webhooks from your selected integrations, make sure to add your Webhook URL to each Organization that you want to receive webhooks. All webhooks from all PMS / OTA will be sent to your registered URL.</p>
+                <p>Weave does not retry proxied webhooks. If an outgoing proxied webhook fails, Weave will return an error to the sender, and rely on the retry logic of the PMS / OTA's webhook system.</p>
+                <p>Currently supports: Connect Airbnb</p>
+                <p>
+                    <div class="code">
+<pre><code>
+BODY
+{
+  action: 'action.string', // the ENUM corresponding to the webhook event type
+  customerId: 'abc123',    // the Weave Organization ID (UUID) for which this action occurred, if applicable
+  listingId: 'abc123',     // the ID of the listing entity in the PMS/OTA, if applicable
+  reservationId: 'abc123', // the ID of the reservation entity in the PMS/OTA, if applicable
+  reviewId: 'abc123'       // the ID of the review entity in the PMS/OTA, if applicable
+}
+</code></pre>
+                    </div>
+                </p>
+                <p>Supported action string values:</p>
+                <ul>
+                    <li><pre>listing.created</pre></li>
+                    <li><pre>listing.changed</pre></li>
+                    <li><pre>listing.deleted</pre></li>
+                    <li><pre>listing.deactivated</pre></li>
+                    <li><pre>listing.reactivated</pre></li>
+                    <li><pre>reservation.created</pre></li>
+                    <li><pre>reservation.changed</pre></li>
+                    <li><pre>channel.activated</pre></li>
+                    <li><pre>review.created</pre></li>
+                    <li><pre>review.submitted</pre></li>
+                    <li><pre>review.published</pre></li>
+                    <li><pre>review.expired</pre></li>
+                    <li><pre>review.changed</pre></li>
+                    <li><pre>review.response_submitted</pre></li>
+                </ul>
             </section>
 
             <section class="mt-5" id="errors">
@@ -289,8 +333,8 @@ curl -X GET \
                     <div class="code">
 <pre><code>
 {
-  status: false
-  proxy_message: “......”   // error message returned from target
+  status: false,
+  proxy_message: "......"   // error message returned from target
 }
 </code></pre>
                     </div>
@@ -302,7 +346,8 @@ curl -X GET \
                 <hr>
                 <p class="lead">Authentication</p>
                 <h6>Context</h6>
-                <p>This endpoint is used to obtain authentication tokens from the target PMS. The authentication token is then used in future requests (ie passed in the header as X-WEAVE-PROXY-ACCESS-TOKEN)</p>
+                <p>This endpoint is used to obtain authentication tokens from the target PMS / OTA. The authentication token is then used in future requests (ie passed in the header as X-WEAVE-PROXY-ACCESS-TOKEN)</p>
+                <p>N.B. for Airbnb Connect, this endpoint has different behaviour, and must be manually actioned by a user of an Airbnb account in order to connect that account, no key is returned by the API.</p>
                 <dl class="row">
                     <dt class="col-sm-3">Path</dt>
                     <dd class="col-sm-9">
@@ -327,11 +372,33 @@ curl -X GET \
   status: true/false,
   data: [
     {
-      access_token: ‘xs34…’ // access token to be used in future requests in the X-WEAVE-PROXY-ACCESS-TOKEN header field
-      expiry: 1749275583083 // expiry time of the access_token presented as the number of milliseconds since the beginning of the UNIX epoch
+      access_token: 'xs34...' // access token to be used in future requests in the X-WEAVE-PROXY-ACCESS-TOKEN header field
+      expiry: 1749275583083   // expiry time of the access_token presented as the number of milliseconds since the beginning of the UNIX epoch
     }
   ],
-  raw: ….   
+  raw: ...
+}
+</code></pre>
+                        </div>
+                    </dd>
+                    <dt class="col-sm-3">(Airbnb) Body</dt>
+                    <dd class="col-sm-9">
+                        <p><span class="fw-semibold">client_id:</span> Your name, for the customer object created in Connect</p>
+                        <p><span class="fw-semibold">client_secret:</span> Your email</p>
+                    </dd>
+                    <dt class="col-sm-3">(Airbnb) Results</dt>
+                    <dd class="col-sm-9">
+                        <div class="code">
+<pre><code>
+{
+  status: true/false,
+  data: [
+    {
+      access_token: 'https://connect.hospitable.com/connect/authenticate/123abc...' // you MUST follow this URL and authenticate your airbnb account in order to finish setting up the connection with Connect
+      expiry: '2024-01-01T00:01:02Z'                                                // expiry time of the access_token URL in ISO-8601 format
+    }
+  ],
+  raw: ...   
 }
 </code></pre>
                         </div>
@@ -339,6 +406,7 @@ curl -X GET \
                     <dt class="col-sm-3">Supported destinations</dt>
                     <dd class="col-sm-9">
                         <ul>
+                            <li>Connect Airbnb</li>
                             <li>Hostaway</li>
                             <li>Hospitable</li>
                         </ul>
@@ -349,7 +417,7 @@ curl -X GET \
             <section class="mt-5" id="listings">
                 <p class="lead">Listing</p>
                 <h6>Context</h6>
-                <p>Request listings from PMS</p>
+                <p>Request listings from PMS / OTA</p>
                 <dl class="row">
                     <dt class="col-sm-3">Path</dt>
                     <dd class="col-sm-9"><code>/listings</code></dd>
@@ -359,7 +427,7 @@ curl -X GET \
                     <dd class="col-sm-9">Content-type: application/json</dd>
                     <dt class="col-sm-3">Search parameters</dt>
                     <dd class="col-sm-9">
-                        <p><span class="fw-semibold">listingId: </span>PMS id of the listing</p>
+                        <p><span class="fw-semibold">listingId: </span>PMS / OTA id of the listing</p>
                     </dd>
                     <dt class="col-sm-3">Results</dt>
                     <dd class="col-sm-9">
@@ -373,7 +441,7 @@ curl -X GET \
     }
   ],
   raw: {
-    // raw response from PMS
+    // raw response from PMS / OTA
   } 
 }   
 </code></pre>
@@ -386,6 +454,7 @@ curl -X GET \
                     <dt class="col-sm-3">Supported destinations</dt>
                     <dd class="col-sm-9">
                         <ul>
+                            <li>Connect Airbnb</li>
                             <li>Guesty for Hosts</li>
                             <li>Hostaway</li>
                             <li>Hospitable</li>
@@ -401,7 +470,7 @@ curl -X GET \
             <section class="mt-5" id="calendar">
                 <p class="lead">Calendar</p>
                 <h6>Context</h6>
-                <p>Request daily calendar from PMS</p>
+                <p>Request daily calendar from PMS / OTA</p>
                 <dl class="row">
                     <dt class="col-sm-3">Path</dt>
                     <dd class="col-sm-9">
@@ -442,6 +511,7 @@ curl -X GET \
                     <dt class="col-sm-3">Supported destinations</dt>
                     <dd class="col-sm-9">
                         <ul>
+                            <li>Connect Airbnb</li>
                             <li>Guesty for Hosts</li>
                             <li>Hostaway</li>
                             <li>Hospitable</li>
@@ -458,7 +528,7 @@ curl -X GET \
                 <p class="lead">Reservations</p>
                 
                 <h6>Context</h6>
-                <p>Request reservations from PMS</p>
+                <p>Request reservations from PMS / OTA</p>
                 <dl class="row">
                     <dt class="col-sm-3">Path</dt>
                     <dd class="col-sm-9">
@@ -500,6 +570,7 @@ curl -X GET \
                     <dt class="col-sm-3">Supported destinations</dt>
                     <dd class="col-sm-9">
                         <ul>
+                            <li>Connect Airbnb</li>
                             <li>Guesty for Hosts</li>
                             <li>Hostaway</li>
                             <li>Hospitable</li>
@@ -798,7 +869,7 @@ BODY
     }
   ],
   raw: {
-    // raw response from PMS
+    // raw response from PMS/OTA
   } 
 }   
 </code></pre>
@@ -811,6 +882,7 @@ BODY
                     <dt class="col-sm-3">Supported destinations</dt>
                     <dd class="col-sm-9">
                         <ul>
+                            <li>Connect Airbnb</li>
                             <li>Hostaway</li>
                             <li>Lodgix</li>
                         </ul>
