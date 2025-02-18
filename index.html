@@ -164,10 +164,10 @@
 <pre><code>
 curl -X GET \ 
       https://use1.weaveapi.com/api/v1/reservations/1234 \             // Weave API endpoint
-      -H 'X-WEAVE-APIKEY: myweaveapikey' \                             // Weave API access token
-      -H 'X-WEAVE-PROXY-DESTINATION: hostaway' \                       // Proxied PMS/OTA
-      -H 'X-WEAVE-PROXY-ACCESS-TOKEN: Hostaway access token' \         // Proxied PMS/OTA access token
-      -H 'Cache-control: no-cache' \                                   // Additional header commands    
+      -H 'X-WEAVE-APIKEY: myweaveapikey’  \                            // Weave API access token
+      -H 'X-WEAVE-PROXY-DESTINATION: hostaway’ \                       // Proxied PMS/OTA
+      -H 'X-WEAVE-PROXY-ACCESS-TOKEN: Hostaway access token’  \        // Proxied PMS/OTA access token
+      -H 'Cache-control: no-cache’ \                                   // Additional header commands    
 </code></pre>
                 </div>
             </section>
@@ -279,7 +279,7 @@ curl -X GET \
 <pre><code>
 {
   data: [ array of normalized data ],
-  raw:  [ raw data as returned by the proxy ],
+  raw:  [ raw data as returned by the proxy ]
   status:  [ true / false indication of success of request ] 
 }
 </code></pre>
@@ -333,8 +333,8 @@ BODY
                     <div class="code">
 <pre><code>
 {
-  status: false,
-  proxy_message: "......"   // error message returned from target
+  status: false
+  proxy_message: “......”   // error message returned from target
 }
 </code></pre>
                     </div>
@@ -346,7 +346,7 @@ BODY
                 <hr>
                 <p class="lead">Authentication</p>
                 <h6>Context</h6>
-                <p>This endpoint is used to obtain authentication tokens from the target PMS / OTA. The authentication token is then used in future requests (ie passed in the header as X-WEAVE-PROXY-ACCESS-TOKEN)</p>
+                <p>This endpoint is used to obtain authentication tokens from the target PMS / OTA. The authentication token is then used in future requests (ie passed in the header as X-WEAVE-PROXY-ACCESS-TOKEN).</p>
                 <p>N.B. for Airbnb Connect, this endpoint has different behaviour, and must be manually actioned by a user of an Airbnb account in order to connect that account, no key is returned by the API.</p>
                 <dl class="row">
                     <dt class="col-sm-3">Path</dt>
@@ -363,6 +363,10 @@ BODY
                     <dd class="col-sm-9">
                         <p><span class="fw-semibold">client_id:</span> PMS user client id</p>
                         <p><span class="fw-semibold">client_secret:</span> PMS user client secret</p>
+                        <p><span class="fw-semibold">redirect_uri:</span> (optional) the URI of the endpoint configured in your system to receive the OAuth callback</p>
+                        <p><span class="fw-semibold">code:</span> (optional) the OAuth token code given to you by the PMS/OTA in the OAuth callback to your redirect URI (only necessary for generating a token)</p>
+                        <p><span class="fw-semibold">grant_type:</span> (optional) defaults to <code>authorization_code</code> to generate a new access token, or <code>refresh_token</code> to refresh an existing one</p>
+                        <p><span class="fw-semibold">refresh_token:</span> (optional) use with the <code>refresh_token</code> grant type to refresh an existing access token</p>
                     </dd>
                     <dt class="col-sm-3">Results</dt>
                     <dd class="col-sm-9">
@@ -372,11 +376,12 @@ BODY
   status: true/false,
   data: [
     {
-      access_token: 'xs34...' // access token to be used in future requests in the X-WEAVE-PROXY-ACCESS-TOKEN header field
-      expiry: 1749275583083   // expiry time of the access_token presented as the number of milliseconds since the beginning of the UNIX epoch
+      access_token: ‘xs34…’    // access token to be used in future requests in the X-WEAVE-PROXY-ACCESS-TOKEN header field
+      refresh_token: ‘abc123…’ // refresh token to be used to generate a new access token when an existing one expires
+      expiry: 1749275583083    // expiry time of the access_token presented as the number of milliseconds since the beginning of the UNIX epoch
     }
   ],
-  raw: ...
+  raw: ….   
 }
 </code></pre>
                         </div>
@@ -407,8 +412,11 @@ BODY
                     <dd class="col-sm-9">
                         <ul>
                             <li>Connect Airbnb</li>
+                            <li>Guesty for Hosts</li>
                             <li>Hostaway</li>
+                            <li>Hostfully</li>
                             <li>Hospitable</li>
+                            <li>Smoobu</li>
                         </ul>
                     </dd>
                 </dl>
