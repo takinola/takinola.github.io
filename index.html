@@ -465,6 +465,7 @@ BODY
                             <li>Connect Airbnb</li>
                             <li>Guesty for Hosts</li>
                             <li>Hostaway</li>
+                            <li>Hostfully</li>
                             <li>Hospitable</li>
                             <li>Lodgify</li>
                             <li>Lodgix</li>
@@ -670,6 +671,7 @@ BODY
                     <dd class="col-sm-9">
                         <ul>
                             <li>Hostaway</li>
+                            <li>Hostfully</li>
                         </ul>
                     </dd>
                 </dl>
@@ -714,7 +716,7 @@ BODY
                         <p><span class="fw-semibold">currency: </span>Currency</p>
                         <p><span class="fw-semibold">isPaid: </span>Payment status of reservation</p>
                         <p><span class="fw-semibold">paymentMethod: </span>Payment method</p>
-                        <p><span class="fw-semibold">status: </span>Reservation status</p>
+                        <p><span class="fw-semibold">status: </span>Reservation status (Hostfully: use <pre>CANCELLED</pre> to cancel a reservation)</p>
                         <p><span class="fw-semibold">comment: </span>Comment</p>
                     </dd>
                     <dt class="col-sm-3">Results</dt>
@@ -754,6 +756,7 @@ BODY
                     <dd class="col-sm-9">
                         <ul>
                             <li>Hostaway</li>
+                            <li>Hostfully</li>
                         </ul>
                     </dd>
                 </dl>
@@ -1028,6 +1031,26 @@ BODY
                             <td>array</td>
                             <td>rooms available in listing</td>
                         </tr>
+                        <tr>
+                            <td>timezone</td>
+                            <td>string</td>
+                            <td>timezone of the listing</td>
+                        </tr>
+                        <tr>
+                            <td>checkInTime</td>
+                            <td>string</td>
+                            <td>check-in time of the listing</td>
+                        </tr>
+                        <tr>
+                            <td>checkOutTime</td>
+                            <td>string</td>
+                            <td>check-out time of the listing</td>
+                        </tr>
+                        <tr>
+                            <td>priceForExtraPerson</td>
+                            <td>string</td>
+                            <td>price to add an extra person to stay in the listing</td>
+                        </tr>
                     </tbody>
                 </table>
             </section>
@@ -1160,6 +1183,21 @@ BODY
                             <td>guestEmail</td>
                             <td>string</td>
                             <td>guest email address</td>
+                        </tr>
+                        <tr>
+                            <td>guestPicture</td>
+                            <td>string</td>
+                            <td>guest picture URL</td>
+                        </tr>
+                        <tr>
+                            <td>guestRecommendations</td>
+                            <td>string</td>
+                            <td>guest recommendations</td>
+                        </tr>
+                        <tr>
+                            <td>isGuestIdentityVerified</td>
+                            <td>boolean</td>
+                            <td>true/false if guest has been verified by channel</td>
                         </tr>
                         <tr>
                             <td>phone</td>
