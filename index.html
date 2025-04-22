@@ -290,10 +290,13 @@ curl -X GET \
 
             <section class="mt-5" id="webhooks">
                 <p class="lead">Webhooks</p>
-                <p>Weave is registered to receive all webhooks from every integrated PMS / OTA partner. In order to start receiving webhooks from your selected integrations, make sure to add your Webhook URL to each Organization that you want to receive webhooks. All webhooks from all PMS / OTA will be sent to your registered URL.</p>
+                <p>Weave is registered to receive all webhooks from every integrated PMS / OTA partner. In order to start receiving webhooks from your selected integrations, make sure to add your Webhook URL to each Organization that you want to receive webhooks. All webhooks from all PMS / OTA will be sent to your registered URL. See below for specific details of how to configure each PMS / OTA's webhooks.</p>
                 <p>Weave does not retry proxied webhooks. If an outgoing proxied webhook fails, Weave will return an error to the sender, and rely on the retry logic of the PMS / OTA's webhook system.</p>
-                <p>Currently supports: Connect Airbnb</p>
-                <p>
+                <p>Currently supports: Connect Airbnb, Hostfully</p>
+                <ul>
+                    <li>Connect Airbnb: use <code>/hooks/connect-airbnb</code></li>
+                    <li>Hostfully: make sure to select <code>POST_JSON</code> as the webhookType, and use the URL <code>/hooks/hostfully/:orgId:</code>
+                </ul>
                     <div class="code">
 <pre><code>
 BODY
